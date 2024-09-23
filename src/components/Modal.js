@@ -9,16 +9,15 @@ function Modal() {
     }, 300);
   };
 
-  // Закрытие при клике вне модального окна
-  const handleClickOutside = (e) => {
-    const modalContent = document.querySelector('.modal-content');
-    
-    if (!modalContent.contains(e.target)) {
-      closeModal();
-    }
-  };
-
   useEffect(() => {
+    // Закрытие при клике вне модального окна
+    const handleClickOutside = (e) => {
+      const modalContent = document.querySelector('.modal-content');
+      if (!modalContent.contains(e.target)) {
+        closeModal();
+      }
+    };
+
     const modal = document.getElementById('modal');
     
     if (modal) {
@@ -30,10 +29,11 @@ function Modal() {
         modal.removeEventListener('click', handleClickOutside);
       }
     };
-  }, [handleClickOutside]); // Добавляем функцию handleClickOutside как зависимость
+  }, []); // Пустой массив зависимостей означает, что эффект будет выполнен только один раз при монтировании
 
   return (
     <div id="modal" className="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-end">
+      {/* Модальное содержимое */}
       <div className="modal-content bg-white w-full h-auto max-h-80 p-4 relative">
         <span className="material-icons absolute top-2 right-4 cursor-pointer" id="close-modal" onClick={closeModal}>
           close
