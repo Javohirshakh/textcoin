@@ -1,0 +1,181 @@
+/* Основной фон */
+body {
+    background: linear-gradient(180deg, rgba(36,37,38,1) 0%, rgba(60,52,39,1) 50%, rgba(17,17,17,1) 100%);
+    color: #fff;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 0;
+}
+
+/* Кнопка с градиентом */
+.custom-button {
+    background: linear-gradient(90deg, rgba(255,153,0,1) 0%, rgba(255,69,0,1) 100%);
+}
+
+/* Стиль для серого фона */
+.bg-gray-800 {
+    position: relative;
+    z-index: 1;
+}
+
+/* Стиль для контейнера кошелька */
+.wallet-container {
+    display: flex;
+    width: 100%;
+    padding: 8px 8px;
+    border-radius: 10px;
+    background-color: rgba(75, 85, 99, 0.7);
+    align-items: center;
+    margin: 4px;
+    cursor: pointer;
+}
+
+.wallet-icon {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+/* Стиль для модального окна */
+#modal {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* Прозрачный черный фон */
+    z-index: 100;
+    transition: all 0.3s ease;
+}
+
+/* Стиль для контента внутри модального окна */
+.modal-content {
+    background-color: rgba(255, 255, 255, 1);
+    color: #000;
+    width: 100%;
+    height: auto;
+    max-height: 80vh; /* Устанавливаем максимальную высоту для мобильных устройств */
+    position: relative;
+    border-radius: 10px 10px 0 0;
+    padding: 20px;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    overflow-y: auto; /* Для прокрутки контента внутри модалки, если она превышает высоту */
+}
+
+/* Активное модальное окно */
+.modal-content.active {
+    transform: translateY(0);
+}
+
+/* Модальное окно открыто */
+#modal.show {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+/* Класс скрытия элемента */
+.hidden {
+    display: none;
+}
+
+/* Стиль для курсора при наведении */
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* Для карточек с иконками */
+.custom-flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.custom-card {
+    background-color: rgba(75, 85, 99, 0.7);
+    border-radius: 10px;
+    font-size: 14px;
+    padding: 0.4rem;
+    text-align: center;
+    flex: 1;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+/* Стили для активного таба */
+.nav-item {
+    padding: 8px;
+    color: #fff;
+}
+
+.nav-item:hover {
+    color: #f0a500;
+}
+
+.active-tab {
+    color: #f0a500;
+    border-bottom: 2px solid #f0a500;
+}
+
+/* Медиазапрос для мобильных устройств */
+@media (max-width: 768px) {
+    .modal-content {
+        max-height: 70vh; /* Сниженная высота для телефонов */
+    }
+}
+
+/* Дополнительные стили для группы */
+.group-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: rgba(75, 85, 99, 0.7);
+    border-radius: 10px;
+}
+
+.group-item img {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.group-item p {
+    margin: 0;
+}
+
+.group-item p.text-sm {
+    font-size: 0.875rem;
+    color: #bbb;
+}
+
+/* Переход страниц */
+.page {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+.page.active {
+    display: block;
+    opacity: 1;
+}
+
+/* Стиль для навигационных элементов */
+.nav-item {
+    padding: 8px;
+    color: #fff;
+  }
+  
+  .nav-item:hover {
+    color: #f0a500;
+  }
+  
+  /* Активный таб в навигации */
+  .active-tab {
+    color: #f0a500;
+    border-bottom: 2px solid #f0a500;
+  }
+  
