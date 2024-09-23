@@ -13,30 +13,27 @@ function Modal() {
   const handleClickOutside = (e) => {
     const modalContent = document.querySelector('.modal-content');
     
-    // Если клик был вне контента модального окна, закрываем модальное окно
-    if (!modalContent || !modalContent.contains(e.target)) {
+    if (!modalContent.contains(e.target)) {
       closeModal();
     }
   };
 
   useEffect(() => {
-    // Добавляем обработчик клика для закрытия модалки при клике вне ее
     const modal = document.getElementById('modal');
+    
     if (modal) {
       modal.addEventListener('click', handleClickOutside);
     }
 
     return () => {
-      // Удаляем обработчик при размонтировании компонента
       if (modal) {
         modal.removeEventListener('click', handleClickOutside);
       }
     };
-  }, []);
+  }, [handleClickOutside]); // Добавляем функцию handleClickOutside как зависимость
 
   return (
     <div id="modal" className="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-end">
-      {/* Модальное содержимое */}
       <div className="modal-content bg-white w-full h-auto max-h-80 p-4 relative">
         <span className="material-icons absolute top-2 right-4 cursor-pointer" id="close-modal" onClick={closeModal}>
           close
