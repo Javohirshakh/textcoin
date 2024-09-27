@@ -3,3 +3,29 @@
     bottom: 0;
     left: 0;
 }
+
+
+
+
+/* Стили для элементов навигации */
+.nav-item {
+  padding: 8px;
+  color: #fff;
+  transition: color 0.3s ease;
+}
+
+/* Эффект при наведении */
+.nav-item:hover {
+  color: #f0a500; /* Цвет при наведении */
+}
+
+/* Стили для активного элемента */
+.active-tab {
+  color: #f0a500;
+  border-bottom: 2px solid #f0a500;
+}
+
+/* Добавляем плавный переход */
+.nav-item, .active-tab {
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+}

@@ -1,6 +1,7 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom'; // Используем NavLink для активного класса
+import { NavLink } from 'react-router-dom';
 import './footer.css';
+
 function Footer() {
   return (
     <nav className="fixed footer bottom-0 left-0 w-full bg-gray-800 p-4">
@@ -23,8 +24,9 @@ function Footer() {
           <p>Bonuslar</p>
         </NavLink>
 
+        {/* Страница пользователя */}
         <NavLink to="/userPage" activeClassName="active-tab" className="nav-item">
-          <span className="material-icons">card_giftcard</span>
+          <span className="material-icons">account_circle</span>
           <p>User Page</p>
         </NavLink>
       </div>
