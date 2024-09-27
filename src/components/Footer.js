@@ -1,9 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom'; // Используем NavLink для активного класса
-
+import './footer.css';
 function Footer() {
   return (
-    <nav className="fixed bottom-0 left-0 w-full bg-gray-800 p-4">
+    <nav className="fixed footer bottom-0 left-0 w-full bg-gray-800 p-4">
       <div className="flex justify-around text-center">
         {/* Главная страница */}
         <NavLink to="/" exact activeClassName="active-tab" className="nav-item">
@@ -21,6 +21,11 @@ function Footer() {
         <NavLink to="/bonuses" activeClassName="active-tab" className="nav-item">
           <span className="material-icons">card_giftcard</span>
           <p>Bonuslar</p>
+        </NavLink>
+
+        <NavLink to="/userPage" activeClassName="active-tab" className="nav-item">
+          <span className="material-icons">card_giftcard</span>
+          <p>User Page</p>
         </NavLink>
       </div>
     </nav>

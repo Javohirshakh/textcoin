@@ -1,8 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import GroupList from '../components/GroupList';
+import { GetAPI } from '../api/api';
 
 function GamesPage() {
   const [showGroups, setShowGroups] = useState(false);
+  const [userInfo, setUserInfo] = useState({});
+
+  useEffect(() => {
+    let mounted = true;
+    GetAPI(777, ["group"])
+      .then(info => {
+        if(mounted) {
+          setUserInfo(info);
+        }
+      })
+    return () => mounted = false;
+  }, [])
 
   return (
     <>
@@ -17,7 +30,7 @@ function GamesPage() {
             </button>
           </li>
         </ul>
-        {showGroups && <GroupList />}
+        {showGroups && <GroupList groups={userInfo.group}/>}
       </div>
     </>
   );

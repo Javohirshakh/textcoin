@@ -6,6 +6,7 @@ import Modal from './components/Modal';
 import HomePage from './pages/HomePage';
 import GamesPage from './pages/GamesPage';
 import BonusesPage from './pages/BonusesPage';
+import UserPage from './pages/UserPage';
 import './styles.css';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/games" element={<GamesPage />} />
             <Route path="/bonuses" element={<BonusesPage />} />
+            <Route path="/userPage" element={<UserPage />} />
           </Routes>
         </main>
         <Footer /> {/* Добавляем Footer */}

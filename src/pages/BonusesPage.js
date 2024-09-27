@@ -1,6 +1,6 @@
 import React from 'react';
 
-function BonusesPage() {
+function UserPage() {
   return (
     <>
       <h2 className="text-3xl font-bold">Bonuslar</h2>
@@ -17,4 +17,6 @@ function BonusesPage() {
   );
 }
 
-export default BonusesPage;
+export default UserPage;
+
+
