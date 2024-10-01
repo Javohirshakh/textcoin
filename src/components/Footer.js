@@ -48,7 +48,7 @@ function Footer() {
           className={({ isActive }) => `nav-item ${isActive ? 'active-tab' : ''}`}
         >
           <span className="material-icons">account_circle</span>
-          <p>User Page</p>
+          <p>Hisob</p>
         </NavLink>
       </div>
     </nav>
