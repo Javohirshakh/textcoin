@@ -4,7 +4,7 @@ import './footer.css';
 
 function Footer() {
   return (
-    <nav className="fixed footer bottom-0 left-0 w-full bg-gray-800 p-4">
+    <nav className="fixed footer bottom-0 left-0 w-full bg-gray-800 py-2"> {/* Уменьшена высота */}
       <div className="flex justify-around text-center">
         {/* Главная страница */}
         <NavLink 
