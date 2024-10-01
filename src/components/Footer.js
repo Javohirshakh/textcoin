@@ -12,7 +12,7 @@ function Footer() {
           className={({ isActive }) => `nav-item ${isActive ? 'active-tab' : ''}`}
         >
           <span className="material-icons">home</span>
-          <p>Textcoin</p>
+          <p className="text-xs">Textcoin</p> {/* Уменьшен только размер текста */}
         </NavLink>
 
         {/* Страница групп (Guruhlar) */}
@@ -20,8 +20,8 @@ function Footer() {
           to="/groupsPage" 
           className={({ isActive }) => `nav-item ${isActive ? 'active-tab' : ''}`}
         >
-          <span className="material-icons">groups</span> {/* Иконка для групп или чатов */}
-          <p>Guruhlar</p>
+          <span className="material-icons">groups</span> 
+          <p className="text-xs">Guruhlar</p> {/* Уменьшен только размер текста */}
         </NavLink>
 
         {/* Страница Do'stlar (Рефералки) */}
@@ -29,8 +29,8 @@ function Footer() {
           to="/referrals" 
           className={({ isActive }) => `nav-item ${isActive ? 'active-tab' : ''}`}
         >
-          <span className="material-icons">group</span>
-          <p>Do'stlar</p>
+          <span className="material-icons">group</span> 
+          <p className="text-xs">Do'stlar</p> {/* Уменьшен только размер текста */}
         </NavLink>
 
         {/* Страница задач (Vazifalar) */}
@@ -38,8 +38,8 @@ function Footer() {
           to="/tasksPage" 
           className={({ isActive }) => `nav-item ${isActive ? 'active-tab' : ''}`}
         >
-          <span className="material-icons">assignment_turned_in</span> {/* Иконка для задач */}
-          <p>Vazifalar</p>
+          <span className="material-icons">assignment_turned_in</span> 
+          <p className="text-xs">Vazifalar</p> {/* Уменьшен только размер текста */}
         </NavLink>
 
         {/* Страница пользователя */}
@@ -47,8 +47,8 @@ function Footer() {
           to="/userPage" 
           className={({ isActive }) => `nav-item ${isActive ? 'active-tab' : ''}`}
         >
-          <span className="material-icons">account_circle</span>
-          <p>Hisob</p>
+          <span className="material-icons">account_circle</span> 
+          <p className="text-xs">Hisob</p> {/* Уменьшен только размер текста */}
         </NavLink>
       </div>
     </nav>
