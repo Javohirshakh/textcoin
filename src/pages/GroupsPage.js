@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { GetAPI } from '../api/api';
 import Loader from '../components/Loader'; // Импортируем лоадер
+import './groups.css'; 
 
 function GroupsPage() {
   const [userInfo, setUserInfo] = useState({});
@@ -49,13 +50,19 @@ function GroupsPage() {
     return (
       <div>
         {groups.map((group, index) => (
-          <div key={index} className="flex justify-between items-center bg-gray-700 p-4 rounded-lg mb-2">
-            <div className="flex items-center">
+          <div key={index} className="flex justify-between items-center bg-gray-700 p-2 rounded-lg mb-2">
+            <div className="flex items-center group_item">
               <img src={group.img} alt={group.name} className="w-12 h-12 rounded-full mr-4" />
-              <div>
+              <div className="flex flex-col w-full text-left">
                 <p className="text-white font-bold">{group.name}</p>
-                <p className="text-xs text-gray-400">Xabarlar: {group.xabarlar}</p>
-                <p className="text-xs text-gray-400">Jami pul: {group.jami_pul} UZS</p>
+                <div className="flex justify-between text-xs text-gray-400">
+                  <span>Xabarlar:</span>
+                  <span>{group.xabarlar}</span>
+                </div>
+                <div className="flex justify-between text-xs text-gray-400">
+                  <span>Jami pul:</span>
+                  <span>{group.jami_pul} UZS</span>
+                </div>
               </div>
             </div>
           </div>
@@ -92,7 +99,7 @@ function GroupsPage() {
           </div>
 
           {/* Список групп */}
-          <div className="mt-4 mb-8 bg-gray-800 p-4 rounded-lg">
+          <div className="mt-4 mb-8 bg-gray-800 p-4 pb-2 rounded-lg">
             <GroupList groups={userInfo.group} />
           </div>
         </>
