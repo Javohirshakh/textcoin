@@ -15,22 +15,31 @@ function Footer() {
           <p>Textcoin</p>
         </NavLink>
 
-        {/* Страница игр */}
+        {/* Страница групп (Guruhlar) */}
         <NavLink 
-          to="/games" 
+          to="/groupsPage" 
           className={({ isActive }) => `nav-item ${isActive ? 'active-tab' : ''}`}
         >
-          <span className="material-icons">sports_esports</span>
-          <p>O'yinlar</p>
+          <span className="material-icons">groups</span> {/* Иконка для групп или чатов */}
+          <p>Guruhlar</p>
         </NavLink>
 
-        {/* Страница бонусов */}
+        {/* Страница Do'stlar (Рефералки) */}
         <NavLink 
-          to="/bonuses" 
+          to="/referrals" 
           className={({ isActive }) => `nav-item ${isActive ? 'active-tab' : ''}`}
         >
-          <span className="material-icons">card_giftcard</span>
-          <p>Bonuslar</p>
+          <span className="material-icons">group</span>
+          <p>Do'stlar</p>
+        </NavLink>
+
+        {/* Страница задач (Vazifalar) */}
+        <NavLink 
+          to="/tasksPage" 
+          className={({ isActive }) => `nav-item ${isActive ? 'active-tab' : ''}`}
+        >
+          <span className="material-icons">assignment_turned_in</span> {/* Иконка для задач */}
+          <p>Vazifalar</p>
         </NavLink>
 
         {/* Страница пользователя */}
