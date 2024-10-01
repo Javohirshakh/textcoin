@@ -99,7 +99,7 @@ function GroupsPage() {
           </div>
 
           {/* Список групп */}
-          <div className="mt-4 mb-8 bg-gray-800 p-4 pb-2 rounded-lg">
+          <div className="mt-4 mb-8 bg-gray-800 p-2 pb-2 rounded-lg">
             <GroupList groups={userInfo.group} />
           </div>
         </>
