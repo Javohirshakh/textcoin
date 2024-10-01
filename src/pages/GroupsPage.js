@@ -1,19 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { GetAPI } from '../api/api';
+import Loader from '../components/Loader'; // Импортируем лоадер
 
 function GroupsPage() {
   const [userInfo, setUserInfo] = useState({});
   const [totalEarned, setTotalEarned] = useState(0); // Для общей суммы
   const [showClaimMessage, setShowClaimMessage] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // Добавляем состояние загрузки
 
   useEffect(() => {
     let mounted = true;
+    setIsLoading(true); // Включаем лоадер при старте запроса
+
     GetAPI(777, ["group"])
       .then(info => {
         if (mounted) {
           setUserInfo(info);
+          setIsLoading(false); // Отключаем лоадер после загрузки данных
         }
       });
+
     return () => mounted = false;
   }, []);
 
@@ -60,30 +66,37 @@ function GroupsPage() {
 
   return (
     <>
-      <h2 className="text-3xl font-bold">Guruhlar</h2>
+      {/* Показываем лоадер, если данные загружаются */}
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <h2 className="text-3xl font-bold">Guruhlar</h2>
 
-      {/* Уведомление о клейме суммы */}
-      {showClaimMessage && (
-        <div className="bg-green-500 text-white p-2 rounded-lg mb-4">
-          Pul muvaffaqiyatli olindi!
-        </div>
+          {/* Уведомление о клейме суммы */}
+          {showClaimMessage && (
+            <div className="bg-green-500 text-white p-2 rounded-lg mb-4">
+              Pul muvaffaqiyatli olindi!
+            </div>
+          )}
+
+          {/* Общая информация о сумме */}
+          <div className="mt-4 bg-gray-800 p-4 rounded-lg">
+            <h3 className="text-lg">Jami ishlangan summa: {totalEarned} UZS</h3>
+            <button 
+              onClick={handleClaim} 
+              className="bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded mt-4"
+            >
+              Pulni olish
+            </button>
+          </div>
+
+          {/* Список групп */}
+          <div className="mt-4 mb-8 bg-gray-800 p-4 rounded-lg">
+            <GroupList groups={userInfo.group} />
+          </div>
+        </>
       )}
-
-      {/* Общая информация о сумме */}
-      <div className="mt-4 bg-gray-800 p-4 rounded-lg">
-        <h3 className="text-lg">Jami ishlangan summa: {totalEarned} UZS</h3>
-        <button 
-          onClick={handleClaim} 
-          className="bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded mt-4"
-        >
-          Claim Pul
-        </button>
-      </div>
-
-      {/* Список групп */}
-      <div className="mt-4 mb-8 bg-gray-800 p-4 rounded-lg">
-        <GroupList groups={userInfo.group} />
-      </div>
     </>
   );
 }
