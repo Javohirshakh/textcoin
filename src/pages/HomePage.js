@@ -7,13 +7,13 @@ function HomePage() {
     // Проверяем, доступен ли объект Telegram для получения данных о пользователе
     if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe) {
       const user = window.Telegram.WebApp.initDataUnsafe.user;
-      setUserName(user ? user.first_name : 'Гость'); // Получаем имя пользователя, или отображаем 'Гость'
+      setUserName(user ? user.first_name : 'Mehmon'); // Получаем имя пользователя, или отображаем 'Гость'
     }
   }, []);
 
   return (
     <>
-      <h1 className="text-2xl font-bold">Привет, {userName}!</h1>
+      <h1 className="text-2xl font-bold">Salom, {userName}!</h1>
       <p className="text-gray-400">Balans</p>
       <h2 className="text-3xl font-bold">14 800 uzs</h2>
       <button className="custom-button text-white py-2 px-6 rounded-full mt-6">Yutuqlaringiz</button>
