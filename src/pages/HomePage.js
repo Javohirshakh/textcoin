@@ -1,19 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { useUser } from '../context/UserContext'; // Подключаем хук для работы с пользователем
 
 function HomePage() {
-  const [userName, setUserName] = useState('');
-
-  useEffect(() => {
-    // Проверяем, доступен ли объект Telegram для получения данных о пользователе
-    if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe) {
-      const user = window.Telegram.WebApp.initDataUnsafe.user;
-      setUserName(user ? user.first_name : 'Mehmon'); // Получаем имя пользователя, или отображаем 'Гость'
-    }
-  }, []);
+  const user = useUser(); // Получаем данные пользователя через контекст
 
   return (
     <>
-      <h1 className="text-2xl font-bold">Salom, {userName}!</h1>
+      <h1 className="text-2xl font-bold">Salom, {user ? user.name : 'Mehmon'}!</h1> {/* Используем данные из контекста */}
       <p className="text-gray-400">Balans</p>
       <h2 className="text-3xl font-bold">14 800 uzs</h2>
       <button className="custom-button text-white py-2 px-6 rounded-full mt-6">Yutuqlaringiz</button>

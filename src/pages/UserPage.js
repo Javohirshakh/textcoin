@@ -30,7 +30,12 @@ function UserPage() {
       {!isLoading && (
         <>
           <h2 className="text-3xl font-bold">
-            Jami pul: {userInfo.jami_pul ? userInfo.jami_pul : '0'}
+            {/* Отображаем имя пользователя */}
+            Salom, {userInfo.first_name ? userInfo.first_name : 'Mehmon'}!
+          </h2>
+          <h2 className="text-3xl font-bold">
+            {/* Отображаем Jami pul */}
+            Jami pul: {userInfo.jami_pul ? userInfo.jami_pul : '0'} UZS
           </h2>
           {/* Остальной контент */}
         </>
