@@ -1,11 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { GetAPI } from '../api/api';
 import Loader from '../components/Loader'; // Импортируем лоадер
+import { useUser } from '../context/UserContext'; // Импортируем хук для получения данных пользователя
 
 function UserPage() {
   const [userInfo, setUserInfo] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const mounted = useRef(true);
+  
+  // Получаем данные пользователя из контекста
+  const user = useUser();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,8 +34,8 @@ function UserPage() {
       {!isLoading && (
         <>
           <h2 className="text-3xl font-bold">
-            {/* Отображаем имя пользователя */}
-            Salom, {userInfo.first_name ? userInfo.first_name : 'Mehmon'}!
+            {/* Используем имя пользователя из контекста */}
+            Salom, {user?.name || 'Mehmon'}!
           </h2>
           <h2 className="text-3xl font-bold">
             {/* Отображаем Jami pul */}
