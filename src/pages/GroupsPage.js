@@ -5,7 +5,6 @@ import './groups.css';
 
 function GroupsPage() {
   const [userInfo, setUserInfo] = useState({});
-  const [totalEarned, setTotalEarned] = useState(0); // Для общей суммы
   const [showClaimMessage, setShowClaimMessage] = useState(false);
   const [claimMessage, setClaimMessage] = useState(''); // Сообщение о клейме
   const [isLoading, setIsLoading] = useState(true); // Добавляем состояние загрузки
@@ -41,9 +40,6 @@ function GroupsPage() {
       return <p className="text-gray-400">Guruhlar topilmadi!</p>;
     }
 
-    // Суммируем значение jami_pul, обязательно приводим к числу
-    const totalSum = groups.reduce((sum, group) => sum + Number(group.jami_pul), 0);
-    setTotalEarned(totalSum); // Обновляем общую сумму
 
     return (
       <div>
