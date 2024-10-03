@@ -18,7 +18,7 @@ function App() {
       <Router>
         <div className="App">
           <Header />
-          <main className="container mx-auto text-center p-6 pb-20" id="main-content">
+          <main className="container mx-auto text-center p-2 pb-20" id="main-content">
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/groupsPage" element={<GroupsPage />} />
