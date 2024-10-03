@@ -12,26 +12,6 @@ import { UserProvider } from './context/UserContext';
 import './styles.css';
 
 function App() {
-  useEffect(() => {
-    // Убедитесь, что SDK готов
-    if (window.Telegram && window.Telegram.WebApp) {
-      window.Telegram.WebApp.ready();
-      window.Telegram.WebApp.expand();
-
-      const handleScroll = () => {
-        // Повторно вызываем expand при каждом скролле
-        window.Telegram.WebApp.expand();
-      };
-
-      // Добавляем обработчик события скролла
-      window.addEventListener('scroll', handleScroll);
-
-      return () => {
-        // Удаляем обработчик события скролла при размонтировании компонента
-        window.removeEventListener('scroll', handleScroll);
-      };
-    }
-  }, []);
 
   return (
     <UserProvider>
