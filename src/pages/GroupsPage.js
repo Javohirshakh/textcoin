@@ -5,8 +5,8 @@ import './groups.css';
 
 function GroupsPage() {
   const [userInfo, setUserInfo] = useState({});
-  const [totalEarned, setTotalEarned] = useState(0); // Для общей суммы
   const [showClaimMessage, setShowClaimMessage] = useState(false);
+  const [claimMessage, setClaimMessage] = useState(''); // Сообщение о клейме
   const [isLoading, setIsLoading] = useState(true); // Добавляем состояние загрузки
 
   useEffect(() => {
@@ -24,28 +24,21 @@ function GroupsPage() {
     return () => mounted = false;
   }, []);
 
-  // Обработка "клейма" суммы
-  const handleClaim = () => {
+  // Обработка "клейма" суммы для каждой группы
+  const handleClaim = (groupName) => {
+    setClaimMessage(`Pul muvaffaqiyatli olindi uchun ${groupName}!`);
     setShowClaimMessage(true);
     setTimeout(() => {
       setShowClaimMessage(false);
+      setClaimMessage('');
     }, 3000); // Уведомление пропадет через 3 секунды
   };
 
-  // Обновляем общую сумму через этот метод
-  const handleTotalSumChange = (sum) => {
-    setTotalEarned(sum);
-  };
-
-  // Проверяем, есть ли группы, и считаем общую сумму
+  // Проверяем, есть ли группы
   const GroupList = ({ groups }) => {
     if (!groups || groups.length === 0) {
       return <p className="text-gray-400">Guruhlar topilmadi!</p>;
     }
-
-    // Суммируем значение jami_pul, обязательно приводим к числу
-    const totalSum = groups.reduce((sum, group) => sum + Number(group.jami_pul), 0);
-    handleTotalSumChange(totalSum); // Обновляем общую сумму
 
     return (
       <div>
@@ -64,6 +57,13 @@ function GroupsPage() {
                   <span>{group.jami_pul} UZS</span>
                 </div>
               </div>
+              {/* Кнопка клейма для каждой группы */}
+              <button 
+                onClick={() => handleClaim(group.name)} 
+                className="bg-green-500 hover:bg-green-700 text-white py-1 px-3 rounded ml-4"
+              >
+                Pulni olish
+              </button>
             </div>
           </div>
         ))}
@@ -82,21 +82,10 @@ function GroupsPage() {
 
           {/* Уведомление о клейме суммы */}
           {showClaimMessage && (
-            <div className="bg-green-500 text-white p-2 rounded-lg mb-4">
-              Pul muvaffaqiyatli olindi!
+            <div className="notification bg-green-500 text-white p-2 rounded-lg absolute top-4 left-1/2 transform -translate-x-1/2">
+              {claimMessage}
             </div>
           )}
-
-          {/* Общая информация о сумме */}
-          <div className="mt-4 bg-gray-800 p-4 rounded-lg">
-            <h3 className="text-lg">Jami ishlangan summa: {totalEarned} UZS</h3>
-            <button 
-              onClick={handleClaim} 
-              className="bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded mt-4"
-            >
-              Pulni olish
-            </button>
-          </div>
 
           {/* Список групп */}
           <div className="mt-4 mb-8 bg-gray-800 p-2 pb-2 rounded-lg">
