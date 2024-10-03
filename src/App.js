@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'; // Импортируем useEffect
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -8,14 +8,28 @@ import GroupsPage from './pages/GroupsPage';
 import BonusesPage from './pages/BonusesPage';
 import TasksPage from './pages/TasksPage';
 import UserPage from './pages/UserPage';
-import { UserProvider } from './context/UserContext';
+import { UserProvider } from './context/UserContext'; 
 import './styles.css';
 
 function App() {
-  // Используем useEffect, чтобы вызвать Telegram.WebApp.expand() после монтирования компонента
   useEffect(() => {
+    // Убедитесь, что SDK готов
     if (window.Telegram && window.Telegram.WebApp) {
-      window.Telegram.WebApp.expand(); // Разворачиваем приложение на полный экран
+      window.Telegram.WebApp.ready();
+      window.Telegram.WebApp.expand();
+
+      const handleScroll = () => {
+        // Повторно вызываем expand при каждом скролле
+        window.Telegram.WebApp.expand();
+      };
+
+      // Добавляем обработчик события скролла
+      window.addEventListener('scroll', handleScroll);
+
+      return () => {
+        // Удаляем обработчик события скролла при размонтировании компонента
+        window.removeEventListener('scroll', handleScroll);
+      };
     }
   }, []);
 
