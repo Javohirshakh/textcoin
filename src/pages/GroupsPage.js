@@ -5,6 +5,7 @@ import './groups.css';
 
 function GroupsPage() {
   const [userInfo, setUserInfo] = useState({});
+  const [totalEarned, setTotalEarned] = useState(0); // Для общей суммы
   const [showClaimMessage, setShowClaimMessage] = useState(false);
   const [claimMessage, setClaimMessage] = useState(''); // Сообщение о клейме
   const [isLoading, setIsLoading] = useState(true); // Добавляем состояние загрузки
@@ -25,20 +26,24 @@ function GroupsPage() {
   }, []);
 
   // Обработка "клейма" суммы для каждой группы
-  const handleClaim = (groupName) => {
-    setClaimMessage(`Pul muvaffaqiyatli olindi uchun ${groupName}!`);
+  const handleClaim = (groupName, jamiPul) => {
+    setClaimMessage(`Siz ${groupName} guruhidan ${jamiPul} UZS oldingiz!`);
     setShowClaimMessage(true);
     setTimeout(() => {
       setShowClaimMessage(false);
       setClaimMessage('');
-    }, 3000); // Уведомление пропадет через 3 секунды
+    }, 4000); // Уведомление пропадет через 4 секунды
   };
 
-  // Проверяем, есть ли группы
+  // Проверяем, есть ли группы, и считаем общую сумму
   const GroupList = ({ groups }) => {
     if (!groups || groups.length === 0) {
       return <p className="text-gray-400">Guruhlar topilmadi!</p>;
     }
+
+    // Суммируем значение jami_pul, обязательно приводим к числу
+    const totalSum = groups.reduce((sum, group) => sum + Number(group.jami_pul), 0);
+    setTotalEarned(totalSum); // Обновляем общую сумму
 
     return (
       <div>
@@ -59,10 +64,10 @@ function GroupsPage() {
               </div>
               {/* Кнопка клейма для каждой группы */}
               <button 
-                onClick={() => handleClaim(group.name)} 
+                onClick={() => handleClaim(group.name, group.jami_pul)} 
                 className="bg-green-500 hover:bg-green-700 text-white py-1 px-3 rounded ml-4"
               >
-                Pulni olish
+                Olish
               </button>
             </div>
           </div>
@@ -82,8 +87,8 @@ function GroupsPage() {
 
           {/* Уведомление о клейме суммы */}
           {showClaimMessage && (
-            <div className="notification bg-green-500 text-white p-2 rounded-lg absolute top-4 left-1/2 transform -translate-x-1/2">
-              {claimMessage}
+            <div className="notification">
+              <p>{claimMessage}</p>
             </div>
           )}
 

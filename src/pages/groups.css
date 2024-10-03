@@ -2,12 +2,38 @@
     width: 100%;
 }
 .notification {
-    position: absolute;
-    top: 1rem;
+    position: fixed;
+    top: 10px;
     left: 50%;
     transform: translateX(-50%);
+    background-color: #4caf50;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    opacity: 0;
+    animation: slideInOut 4s forwards; /* Анимация появления и исчезновения */
     z-index: 1000;
-    max-width: 80%;
     text-align: center;
+  }
+  
+  @keyframes slideInOut {
+    0% {
+      opacity: 0;
+      transform: translateX(-50%) translateY(-100%);
+    }
+    10% {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    90% {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(-50%) translateY(-100%);
+    }
   }
   
