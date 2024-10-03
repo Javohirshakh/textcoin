@@ -44,7 +44,7 @@ function GroupsPage() {
     return (
       <div>
         {groups.map((group, index) => (
-          <div key={index} className="flex justify-between items-center bg-gray-700 p-2 rounded-lg mb-1">
+          <div key={index} className="flex justify-between items-center bg-gray-700 p-2 rounded-lg item">
             <div className="flex items-center group_item">
               <img src={group.img} alt={group.name} className="w-12 h-12 rounded-full mr-4" />
               <div className="flex flex-col w-full text-left">

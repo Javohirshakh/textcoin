@@ -1,6 +1,12 @@
 .group_item {
     width: 100%;
 }
+.item {
+    margin-bottom: 6px!important;
+}
+.item:last-child {
+    margin-bottom: 0!important;
+}
 /* Уведомление с шириной на весь экран с отступами по краям */
 .notification {
     position: fixed;
