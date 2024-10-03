@@ -2,13 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
+    <meta name="description" content="Web site created using create-react-app" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
@@ -16,37 +12,22 @@
 
     <!-- Подключаем Telegram Web Apps SDK -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+    <script>
+      window.addEventListener('DOMContentLoaded', function() {
+        // Ensure that Telegram WebApp SDK is ready and expand the app to full screen
+        Telegram.WebApp.ready();
+        Telegram.WebApp.expand();
+
+        // Prevent the default scroll behavior (especially useful for mobile devices)
+        document.body.addEventListener('touchmove', function(e) {
+          e.preventDefault();
+        }, { passive: false });
+      });
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-
-    <!-- Скрипт для Telegram Web Apps SDK -->
-    <script>
-      function expandApp() {
-        if (window.Telegram && window.Telegram.WebApp) {
-          console.log("Expanding Telegram Web App...");
-          try {
-            Telegram.WebApp.ready();
-            Telegram.WebApp.expand();
-            console.log("Expand method executed successfully.");
-          } catch (error) {
-            console.error("Error expanding app: ", error);
-          }
-        } else {
-          console.error("Telegram WebApp SDK not found.");
-        }
-      }
-
-      // Убедитесь, что приложение Telegram готово, затем расширяем
-      document.addEventListener('DOMContentLoaded', function() {
-        expandApp();
-      });
-
-      // Повторяем расширение при скролле страницы
-      window.addEventListener('scroll', function() {
-        expandApp();
-      });
-    </script>
   </body>
 </html>
