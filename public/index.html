@@ -2,9 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta name="description" content="Web site created using create-react-app" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
@@ -12,38 +16,15 @@
 
     <!-- Подключаем Telegram Web Apps SDK -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-
-    <script>
-      window.addEventListener('DOMContentLoaded', function() {
-        // Ensure that Telegram WebApp SDK is ready and expand the app to full screen
-        Telegram.WebApp.ready();
-        Telegram.WebApp.expand();
-
-        // Function to handle scroll within specific containers
-        function preventBodyScroll(e) {
-          const target = e.target;
-
-          // Allow scrolling if the target is inside a scrollable container
-          if (target.closest('.scrollable')) {
-            return true; // Allow scroll in scrollable areas
-          }
-
-          e.preventDefault(); // Prevent default body scrolling
-        }
-
-        // Attach the scroll prevention handler to body
-        document.body.addEventListener('touchmove', preventBodyScroll, { passive: false });
-      });
-    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
 
-    <!-- Example content container that allows scrolling -->
-    <div class="scrollable" style="overflow-y: scroll; max-height: 80vh;">
-      <!-- Scrollable content here -->
-      <div style="height: 1500px;">Scrollable Content</div>
-    </div>
+    <!-- Скрипт для расширения приложения на полный экран -->
+    <script>
+      Telegram.WebApp.ready(); // Убедитесь, что SDK готов
+      Telegram.WebApp.expand(); // Расширяем на весь экран
+    </script>
   </body>
 </html>
