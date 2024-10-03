@@ -19,20 +19,20 @@
         Telegram.WebApp.ready();
         Telegram.WebApp.expand();
 
-        // Function to allow scrolling inside specific containers while preventing body scroll
-        function preventScroll(e) {
-          let target = e.target;
-          while (target !== document.body) {
-            if (target.classList.contains('scrollable')) {
-              return;
-            }
-            target = target.parentElement;
+        // Function to handle scroll within specific containers
+        function preventBodyScroll(e) {
+          const target = e.target;
+
+          // Allow scrolling if the target is inside a scrollable container
+          if (target.closest('.scrollable')) {
+            return true; // Allow scroll in scrollable areas
           }
-          e.preventDefault();
+
+          e.preventDefault(); // Prevent default body scrolling
         }
 
-        // Apply the scroll prevention for body while allowing scrollable areas to work
-        document.body.addEventListener('touchmove', preventScroll, { passive: false });
+        // Attach the scroll prevention handler to body
+        document.body.addEventListener('touchmove', preventBodyScroll, { passive: false });
       });
     </script>
   </head>
@@ -43,6 +43,7 @@
     <!-- Example content container that allows scrolling -->
     <div class="scrollable" style="overflow-y: scroll; max-height: 80vh;">
       <!-- Scrollable content here -->
+      <div style="height: 1500px;">Scrollable Content</div>
     </div>
   </body>
 </html>
