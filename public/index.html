@@ -21,14 +21,24 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
 
-    <!-- Скрипт для расширения приложения на полный экран и обновления при скролле -->
+    <!-- Скрипт для Telegram Web Apps SDK -->
     <script>
-      Telegram.WebApp.ready(); // Убедитесь, что SDK готов
-      Telegram.WebApp.expand(); // Расширяем на весь экран
+      function expandApp() {
+        if (window.Telegram.WebApp) {
+          console.log("Expanding Telegram Web App...");
+          Telegram.WebApp.ready();
+          Telegram.WebApp.expand();
+        }
+      }
 
-      // Добавляем обработчик для обновления expand() при скролле
+      // Убедитесь, что приложение Telegram готово, затем расширяем
+      document.addEventListener('DOMContentLoaded', function() {
+        expandApp();
+      });
+
+      // Повторяем расширение при скролле страницы
       window.addEventListener('scroll', function() {
-        Telegram.WebApp.expand();
+        expandApp();
       });
     </script>
   </body>
