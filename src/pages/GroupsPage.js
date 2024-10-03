@@ -44,6 +44,7 @@ function GroupsPage() {
     // Суммируем значение jami_pul, обязательно приводим к числу
     const totalSum = groups.reduce((sum, group) => sum + Number(group.jami_pul), 0);
     setTotalEarned(totalSum); // Обновляем общую сумму
+    console.log(totalEarned)
 
     return (
       <div>
