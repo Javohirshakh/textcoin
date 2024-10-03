@@ -1,39 +1,46 @@
 .group_item {
     width: 100%;
 }
+/* Уведомление с шириной на весь экран с отступами по краям */
 .notification {
     position: fixed;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
+    top: 20px; /* Отступ сверху */
+    left: 0;
+    right: 0;
+    margin: 0 20px; /* Отступы по оси X */
     background-color: #4caf50;
     color: white;
-    padding: 12px 20px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    font-size: 16px;
-    opacity: 0;
-    animation: slideInOut 4s forwards; /* Анимация появления и исчезновения */
+    padding: 15px;
+    font-size: 18px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 1000;
-    text-align: center;
+    animation: fadeInOut 4s forwards;
   }
   
-  @keyframes slideInOut {
+  /* Кнопка с большим border-radius */
+  .claim-button {
+    border-radius: 20px; /* Увеличенный border-radius */
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Анимация для уведомления */
+  @keyframes fadeInOut {
     0% {
       opacity: 0;
-      transform: translateX(-50%) translateY(-100%);
+      transform: translateY(-50%);
     }
     10% {
       opacity: 1;
-      transform: translateX(-50%) translateY(0);
+      transform: translateY(0);
     }
     90% {
       opacity: 1;
-      transform: translateX(-50%) translateY(0);
+      transform: translateY(0);
     }
     100% {
       opacity: 0;
-      transform: translateX(-50%) translateY(-100%);
+      transform: translateY(-50%);
     }
   }
   

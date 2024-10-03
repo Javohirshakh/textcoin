@@ -44,7 +44,6 @@ function GroupsPage() {
     // Суммируем значение jami_pul, обязательно приводим к числу
     const totalSum = groups.reduce((sum, group) => sum + Number(group.jami_pul), 0);
     setTotalEarned(totalSum); // Обновляем общую сумму
-    console.log(totalEarned)
 
     return (
       <div>
@@ -66,7 +65,7 @@ function GroupsPage() {
               {/* Кнопка клейма для каждой группы */}
               <button 
                 onClick={() => handleClaim(group.name, group.jami_pul)} 
-                className="bg-green-500 hover:bg-green-700 text-white py-1 px-3 rounded ml-4"
+                className="claim-button bg-green-500 hover:bg-green-700 text-white py-1 px-3 rounded ml-4"
               >
                 Olish
               </button>
