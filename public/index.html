@@ -24,10 +24,17 @@
     <!-- Скрипт для Telegram Web Apps SDK -->
     <script>
       function expandApp() {
-        if (window.Telegram.WebApp) {
+        if (window.Telegram && window.Telegram.WebApp) {
           console.log("Expanding Telegram Web App...");
-          Telegram.WebApp.ready();
-          Telegram.WebApp.expand();
+          try {
+            Telegram.WebApp.ready();
+            Telegram.WebApp.expand();
+            console.log("Expand method executed successfully.");
+          } catch (error) {
+            console.error("Error expanding app: ", error);
+          }
+        } else {
+          console.error("Telegram WebApp SDK not found.");
         }
       }
 
