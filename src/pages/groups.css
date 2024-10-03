@@ -2,7 +2,7 @@
     width: 100%;
 }
 .item {
-    margin-bottom: 6px!important;
+    margin-bottom: 8px!important;
 }
 .item:last-child {
     margin-bottom: 0!important;
