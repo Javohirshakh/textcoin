@@ -37,7 +37,7 @@ function TasksPage() {
       {tasks.map((task, index) => (
         <div key={index} className="task-item">
           <div className="task-info">
-            <p className="task-name">{task.name}</p>
+            <span className="task-name">{task.name}</span>
             <div className='task-bottom'>
             <span className="task-reward">{task.reward}</span>
             <button 
