@@ -52,7 +52,7 @@ function TasksPage() {
             className="task-button" 
             onClick={() => window.open(task.actionLink, "_blank")}
           >
-            Join
+            Bajarish
           </button>
         </div>
       ))}
