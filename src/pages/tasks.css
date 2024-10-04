@@ -1,0 +1,61 @@
+.tasks-container {
+    background: #2d2d2d;
+    padding: 16px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+  }
+  
+  .task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #3b3b3b;
+    padding: 8px 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .task-name {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  
+  .task-reward {
+    color: #ffca28;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  .task-bottom {
+    display: flex;
+    margin-top: 4px;
+  }
+  
+  .task-button, .check-button {
+    background-color: #34a853;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-left: 20px;
+  }
+  
+  .check-button {
+    background-color: transparent; /* Без фона */
+    color: #ffffff; /* Белый текст */
+    font-size: 12px; /* Уменьшаем шрифт */
+    padding: 4px 8px; /* Меньший отступ */
+    border: 1px solid #ffca28; /* Линия вокруг кнопки */
+    border-radius: 8px; /* Закругленные углы */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 2px;
+  }
+  
+  .check-button:hover {
+    color: #ffca28; /* При наведении меняем цвет текста */
+    border-color: #ffca28; /* Подсвечиваем границу */
+  }
+  
+  
