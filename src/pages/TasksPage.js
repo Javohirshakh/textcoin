@@ -5,19 +5,19 @@ function TasksPage() {
   // Массив с задачами
   const tasks = [
     { 
-      name: "TextCoin telegram kanaliga obuna bo'ling!", 
+      name: "Telegramga obuna!", 
       reward: "+5000 UZS", 
       actionLink: "https://t.me/bmwgacha",
       check: false 
     },
     { 
-      name: "TextCoin instagramiga obuna bo'ling!", 
+      name: "Instagramga obuna!", 
       reward: "+300 UZS", 
       actionLink: "https://instagram.com/",
       check: false 
     },
     { 
-      name: "TextCoin youtubega obuna bo'ling!", 
+      name: "Youtubega obuna!", 
       reward: "+700 UZS", 
       actionLink: "https://youtube.com/",
       check: false 
