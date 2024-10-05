@@ -17,10 +17,7 @@
   .task-item:last-child {
     margin-bottom: 0;
   }
-  .task-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  }
+
   
   /* Стиль для названия задачи */
   .task-name {
@@ -58,10 +55,10 @@
     transition: all 0.3s ease;
   }
   
-  .check-button:hover {
+  /* .check-button:hover {
     color: #ffca28;
     border-color: #ffca28;
-  }
+  } */
   
   /* Стиль для основной кнопки "Bajarish" */
   .task-button {
