@@ -1,65 +1,76 @@
+/* Стиль для контейнера */
 .tasks-container {
-    background: #2d2d2d;
-    padding: 16px;
-    border-radius: 10px;
-    margin-bottom: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
+  /* Стиль для каждого элемента задания */
   .task-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #3b3b3b;
-    padding: 8px 10px;
+    padding: 8px;
     border-radius: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  .task-item:last-child {
+    margin-bottom: 0;
+  }
+  .task-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   }
   
+  /* Стиль для названия задачи */
   .task-name {
     color: #ffffff;
     font-weight: bold;
-    font-size: 14px;
-    padding-left: 0!important;
+    font-size: 16px;
     text-align: left;
     display: flex;
     width: 100%;
   }
   
-  .task-reward {
-    color: #ffca28;
-    font-weight: bold;
-    font-size: 14px;
-  }
+  /* Стиль для блока с вознаграждением и кнопкой "Check" */
   .task-bottom {
     display: flex;
     margin-top: 4px;
   }
   
-  .task-button, .check-button {
-    background-color: #34a853;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    margin-left: 20px;
+  /* Стиль для вознаграждения */
+  .task-reward {
+    color: #ffca28; /* Золотистый цвет вознаграждения */
+    font-weight: bold;
+    font-size: 14px;
+    margin-right: 10px;
   }
   
+  /* Стиль для кнопки "Tekshirish" */
   .check-button {
-    background-color: transparent; /* Без фона */
-    color: #ffffff; /* Белый текст */
-    font-size: 12px; /* Уменьшаем шрифт */
-    padding: 4px 8px; /* Меньший отступ */
-    border: 1px solid #ffca28; /* Линия вокруг кнопки */
-    border-radius: 8px; /* Закругленные углы */
+    background-color: transparent;
+    color: #ffffff;
+    font-size: 12px;
+    padding: 4px 8px;
+    border: 1px solid #ffca28;
+    border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
-    padding: 2px;
   }
   
   .check-button:hover {
-    color: #ffca28; /* При наведении меняем цвет текста */
-    border-color: #ffca28; /* Подсвечиваем границу */
+    color: #ffca28;
+    border-color: #ffca28;
   }
   
+  /* Стиль для основной кнопки "Bajarish" */
+  .task-button {
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .task-button:hover {
+    background-color: #2d8c47;
+  }
   
