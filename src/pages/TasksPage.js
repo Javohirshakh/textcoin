@@ -19,20 +19,34 @@ function TasksPage() {
       }
       setIsLoading(false);
     };
-  
+
     fetchTasks();
   }, []);
-  
 
-  // Обработчик для выполнения задачи
-  const handleCheck = (index) => {
-    tasks[index].status = false; // Обновляем статус на "выполнено"
-    alert(`Siz "${tasks[index].task}" uchun ${tasks[index].summa} UZS oldingiz!`);
-    setTasks([...tasks]); // Обновляем состояние для повторного рендеринга
+  // Обработчик для проверки задачи
+  const handleCheck = async (taskId, index) => {
+    try {
+      // Отправляем запрос для проверки задачи
+      const result = await GetAPI(1234, 'check.task', { task_id: taskId });
+
+      console.log("Ответ от API проверки задачи:", result);
+
+      // Проверяем статус ответа и показываем соответствующее сообщение
+      if (result.status) {
+        alert(result.msg || "Zadacha muvaffaqiyatli bajarildi!"); // Показываем успешное сообщение
+        tasks[index].status = false; // Обновляем статус задачи на "выполнено"
+        setTasks([...tasks]); // Обновляем состояние для повторного рендеринга
+      } else {
+        alert(result.msg || "Xato: Zadachani tekshirib bo'lmadi, keyinroq urinib ko'ring.");
+      }
+    } catch (error) {
+      console.error("Ошибка при проверке задачи:", error);
+      alert("Xatolik yuz berdi. Keyinroq urinib ko'ring.");
+    }
   };
 
   if (isLoading) {
-    return <Loader />; // Показываем компонент Loader вместо текста "Loading..."
+    return <Loader />; // Показываем компонент Loader пока загружаются задачи
   }
 
   return (
@@ -48,7 +62,7 @@ function TasksPage() {
                 {task.status ? (
                   <button 
                     className="check-button"
-                    onClick={() => handleCheck(index)}
+                    onClick={() => handleCheck(task.task_id, index)} // Передаем task_id для проверки
                   >
                     Tekshirish
                   </button>
