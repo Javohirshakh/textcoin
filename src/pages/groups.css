@@ -23,7 +23,25 @@
     z-index: 1000;
     animation: fadeInOut 4s forwards;
   }
-  
+  /* Добавим стили для красного уведомления */
+.notification.bg-red-500 {
+  background-color: #f56565; /* Красный цвет для ошибок */
+  color: white; /* Белый текст */
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.notification.bg-green-500 {
+  background-color: #48bb78; /* Зеленый цвет для успеха */
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 10px;
+  text-align: center;
+}
+
   /* Кнопка с большим border-radius */
   .claim-button {
     border-radius: 20px; /* Увеличенный border-radius */

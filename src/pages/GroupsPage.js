@@ -1,45 +1,69 @@
 import React, { useState, useEffect } from 'react';
 import { GetAPI } from '../api/api';
-import Loader from '../components/Loader'; // Импортируем лоадер
-import './groups.css'; 
+import Loader from '../components/Loader';
+import './groups.css';
 
 function GroupsPage() {
   const [userInfo, setUserInfo] = useState({});
   const [showClaimMessage, setShowClaimMessage] = useState(false);
   const [claimMessage, setClaimMessage] = useState(''); // Сообщение о клейме
-  const [isLoading, setIsLoading] = useState(true); // Добавляем состояние загрузки
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false); // Добавляем состояние ошибки
 
   useEffect(() => {
     let mounted = true;
-    setIsLoading(true); // Включаем лоадер при старте запроса
+    setIsLoading(true);
 
-    GetAPI(777, ["group"])
-      .then(info => {
-        if (mounted) {
-          setUserInfo(info);
-          setIsLoading(false); // Отключаем лоадер после загрузки данных
-        }
-      });
+    GetAPI(777, null, ["group"]).then(info => {
+      if (mounted) {
+        setUserInfo(info);
+        setIsLoading(false);
+      }
+    });
 
     return () => mounted = false;
   }, []);
 
-  // Обработка "клейма" суммы для каждой группы
-  const handleClaim = (groupName, jamiPul) => {
-    setClaimMessage(`Siz ${groupName} guruhidan ${jamiPul} UZS oldingiz!`);
-    setShowClaimMessage(true);
-    setTimeout(() => {
-      setShowClaimMessage(false);
-      setClaimMessage('');
-    }, 4000); // Уведомление пропадет через 4 секунды
+  const handleClaim = async (groupName, chatId) => {
+    try {
+      console.log(`Отправляем запрос для группы: ${groupName}, chat_id: ${chatId}`);
+      
+      const result = await GetAPI(777, ["getball"], { chat_id: chatId });
+
+      console.log("Ответ от API:", result); // Логируем весь ответ
+
+      if (result.status) {
+        console.log("Успешный результат:", result.msg); 
+        setClaimMessage(result.msg || "Muvaffaqiyatli bajarildi!"); 
+        setIsError(false);
+      } else {
+        console.error(`Serverdan xatolik: ${result.msg || "Keyinroq urinib ko'ring"}`); 
+        setClaimMessage(`${result.msg || "Keyinroq urinib ko'ring!"}`); 
+        setIsError(true);
+      }
+
+      setShowClaimMessage(true);
+      setTimeout(() => {
+        setShowClaimMessage(false);
+        setClaimMessage('');
+      }, 3000);
+
+    } catch (error) {
+      console.error(`Ошибка запроса: ${error.message}`); 
+      setClaimMessage(`Ошибка: Повторите позже`);
+      setIsError(true);
+      setShowClaimMessage(true);
+      setTimeout(() => {
+        setShowClaimMessage(false);
+        setClaimMessage('');
+      }, 3000);
+    }
   };
 
-  // Проверяем, есть ли группы, и считаем общую сумму
   const GroupList = ({ groups }) => {
     if (!groups || groups.length === 0) {
       return <p className="text-gray-400">Guruhlar topilmadi!</p>;
     }
-
 
     return (
       <div>
@@ -58,9 +82,8 @@ function GroupsPage() {
                   <span>{group.jami_pul} UZS</span>
                 </div>
               </div>
-              {/* Кнопка клейма для каждой группы */}
               <button 
-                onClick={() => handleClaim(group.name, group.jami_pul)} 
+                onClick={() => handleClaim(group.name, group.chat_id)} 
                 className="claim-button bg-green-500 hover:bg-green-700 text-white py-1 px-3 rounded ml-4"
               >
                 Olish
@@ -74,21 +97,18 @@ function GroupsPage() {
 
   return (
     <>
-      {/* Показываем лоадер, если данные загружаются */}
       {isLoading ? (
         <Loader />
       ) : (
         <>
           <h2 className="text-3xl font-bold">Guruhlar</h2>
 
-          {/* Уведомление о клейме суммы */}
           {showClaimMessage && (
-            <div className="notification">
+            <div className={`notification ${isError ? 'bg-red-500' : 'bg-green-500'}`}>
               <p>{claimMessage}</p>
             </div>
           )}
 
-          {/* Список групп */}
           <div className="mt-4 mb-8 bg-gray-800 p-2 pb-2 rounded-lg">
             <GroupList groups={userInfo.group} />
           </div>
