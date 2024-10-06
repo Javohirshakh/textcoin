@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GetAPI } from '../api/api';  // Импортируем функцию из api.js
 
 function Modal() {
@@ -9,6 +9,14 @@ function Modal() {
     setTimeout(() => {
       document.getElementById('modal').classList.remove('show');
     }, 300);
+  };
+
+  // Открытие модального окна
+  const openModal = () => {
+    document.getElementById('modal').classList.add('show');
+    setTimeout(() => {
+      document.querySelector('.modal-content').classList.add('active');
+    }, 10);
   };
 
   // Форматируем номер карты с пробелами
@@ -28,13 +36,11 @@ function Modal() {
     e.preventDefault();
 
     try {
-      // Удаляем пробелы перед отправкой на сервер
       const cleanCardNumber = cardNumber.replace(/\s/g, '');
       const result = await GetAPI(777, 'savecard', { card: cleanCardNumber });
 
       console.log("Ответ от API:", result);
 
-      // Логика обработки ответа
       if (result.status) {
         alert("Karta muvaffaqiyatli ulandi!");
         closeModal(); // Закрываем модальное окно
@@ -47,33 +53,58 @@ function Modal() {
     }
   };
 
-  return (
-    <div id="modal" className="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-end">
-      {/* Модальное содержимое */}
-      <div className="modal-content bg-white w-full h-auto max-h-80 p-4 relative">
-        <span className="material-icons absolute top-2 right-4 cursor-pointer" id="close-modal" onClick={closeModal}>
-          close
-        </span>
-        <h2 className="text-lg font-bold mb-4">Bank kartangizni ulang</h2>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="card-number" className="block text-gray-700 mb-2">Karta raqami</label>
-          <input 
-            type="text" 
-            id="card-number" 
-            className="w-full p-2 border border-gray-300 rounded mb-4" 
-            placeholder="1234 5678 9012 3456" 
-            value={cardNumber}
-            onChange={handleCardNumberChange}
-            minLength={19}  // Минимум 19 символов (с пробелами)
-            maxLength={19}  // Максимум 19 символов (с пробелами)
-            pattern="\d{4} \d{4} \d{4} \d{4}"  // Только цифры и пробелы
-            required  // Обязательно для заполнения
-          />
+  useEffect(() => {
+    // Закрытие модального окна при клике вне его содержимого
+    const handleClickOutside = (e) => {
+      const modalContent = document.querySelector('.modal-content');
+      const modal = document.getElementById('modal');
+      // Проверяем, был ли клик за пределами модального содержимого
+      if (modalContent && !modalContent.contains(e.target) && modal.classList.contains('show')) {
+        closeModal();
+      }
+    };
 
-          <button type="submit" className="w-full bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded">
-            Kartani ulash
-          </button>
-        </form>
+    // Добавляем событие
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      // Удаляем событие при размонтировании
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  return (
+    <div>
+      <button onClick={openModal} className="open-modal-button">
+        Открыть Модальное Окно
+      </button>
+
+      <div id="modal" className="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-end">
+        {/* Модальное содержимое */}
+        <div className="modal-content bg-white w-full h-auto max-h-80 p-4 relative">
+          <span className="material-icons absolute top-2 right-4 cursor-pointer" id="close-modal" onClick={closeModal}>
+            close
+          </span>
+          <h2 className="text-lg font-bold mb-4">Bank kartangizni ulang</h2>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="card-number" className="block text-gray-700 mb-2">Karta raqami</label>
+            <input 
+              type="text" 
+              id="card-number" 
+              className="w-full p-2 border border-gray-300 rounded mb-4" 
+              placeholder="1234 5678 9012 3456" 
+              value={cardNumber}
+              onChange={handleCardNumberChange}
+              minLength={19}
+              maxLength={19}
+              pattern="\d{4} \d{4} \d{4} \d{4}"
+              required
+            />
+            <button type="submit" className="w-full bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded">
+              Kartani ulash
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );
