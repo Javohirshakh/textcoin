@@ -15,7 +15,7 @@ function TasksPage() {
       if (result.status) {
         setTasks(result.gettask);
       } else {
-        alert("Задачи не найдены или произошла ошибка.");
+        alert("Vazifalar topilmadi.");
       }
       setIsLoading(false);
     };
@@ -33,11 +33,11 @@ function TasksPage() {
 
       // Проверяем статус ответа и показываем соответствующее сообщение
       if (result.status) {
-        alert(result.msg || "Zadacha muvaffaqiyatli bajarildi!"); // Показываем успешное сообщение
+        alert(result.msg || "Vazifa muvaffaqiyatli bajarildi!"); // Показываем успешное сообщение
         tasks[index].status = false; // Обновляем статус задачи на "выполнено"
         setTasks([...tasks]); // Обновляем состояние для повторного рендеринга
       } else {
-        alert(result.msg || "Xato: Zadachani tekshirib bo'lmadi, keyinroq urinib ko'ring.");
+        alert(result.msg || "Xato: Vazifani tekshirib bo'lmadi, keyinroq urinib ko'ring.");
       }
     } catch (error) {
       console.error("Ошибка при проверке задачи:", error);
