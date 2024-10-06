@@ -43,9 +43,6 @@ function Modal() {
           <label htmlFor="card-number" className="block text-gray-700 mb-2">Karta raqami</label>
           <input type="text" id="card-number" className="w-full p-2 border border-gray-300 rounded mb-4" placeholder="1234 5678 9012 3456" />
 
-          <label htmlFor="expiry-date" className="block text-gray-700 mb-2">Amal qilish muddati</label>
-          <input type="text" id="expiry-date" className="w-full p-2 border border-gray-300 rounded mb-4" placeholder="MM/YY" />
-
           <button type="submit" className="w-full bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded">Kartaning ulash</button>
         </form>
       </div>
