@@ -11,14 +11,6 @@ function Modal() {
     }, 300);
   };
 
-  // Открытие модального окна
-  const openModal = () => {
-    document.getElementById('modal').classList.add('show');
-    setTimeout(() => {
-      document.querySelector('.modal-content').classList.add('active');
-    }, 10);
-  };
-
   // Форматируем номер карты с пробелами
   const formatCardNumber = (value) => {
     const cleaned = value.replace(/\D/g, ''); // Удаляем все нецифровые символы
