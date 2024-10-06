@@ -75,9 +75,6 @@ function Modal() {
 
   return (
     <div>
-      <button onClick={openModal} className="open-modal-button">
-        Открыть Модальное Окно
-      </button>
 
       <div id="modal" className="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-end">
         {/* Модальное содержимое */}
