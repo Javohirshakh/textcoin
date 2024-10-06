@@ -14,12 +14,15 @@ function TasksPage() {
       
       if (result.status) {
         setTasks(result.gettask);
+      } else {
+        alert("Задачи не найдены или произошла ошибка.");
       }
       setIsLoading(false);
     };
-
+  
     fetchTasks();
   }, []);
+  
 
   // Обработчик для выполнения задачи
   const handleCheck = (index) => {
