@@ -5,10 +5,7 @@ import './groups.css';
 
 function GroupsPage() {
   const [userInfo, setUserInfo] = useState({});
-  const [showClaimMessage, setShowClaimMessage] = useState(false);
-  const [claimMessage, setClaimMessage] = useState(''); // Сообщение о клейме
   const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false); // Добавляем состояние ошибки
 
   useEffect(() => {
     let mounted = true;
@@ -30,33 +27,18 @@ function GroupsPage() {
       
       const result = await GetAPI(777, ["getball"], { chat_id: chatId });
 
-      console.log("Ответ от API:", result); // Логируем весь ответ
+      console.log("Ответ от API:", result); 
 
+      // Проверяем статус ответа
       if (result.status) {
-        console.log("Успешный результат:", result.msg); 
-        setClaimMessage(result.msg || "Muvaffaqiyatli bajarildi!"); 
-        setIsError(false);
+        alert(result.msg || "Muvaffaqiyatli bajarildi!"); // Обычный alert для успешного сообщения
       } else {
-        console.error(`Serverdan xatolik: ${result.msg || "Keyinroq urinib ko'ring"}`); 
-        setClaimMessage(`${result.msg || "Keyinroq urinib ko'ring!"}`); 
-        setIsError(true);
+        alert(result.msg || "Keyinroq urinib ko'ring!"); // Обычный alert для ошибки
       }
-
-      setShowClaimMessage(true);
-      setTimeout(() => {
-        setShowClaimMessage(false);
-        setClaimMessage('');
-      }, 3000);
 
     } catch (error) {
       console.error(`Ошибка запроса: ${error.message}`); 
-      setClaimMessage(`Ошибка: Повторите позже`);
-      setIsError(true);
-      setShowClaimMessage(true);
-      setTimeout(() => {
-        setShowClaimMessage(false);
-        setClaimMessage('');
-      }, 3000);
+      alert("Ошибка: Повторите позже");
     }
   };
 
@@ -102,13 +84,6 @@ function GroupsPage() {
       ) : (
         <>
           <h2 className="text-3xl font-bold">Guruhlar</h2>
-
-          {showClaimMessage && (
-            <div className={`notification ${isError ? 'bg-red-500' : 'bg-green-500'}`}>
-              <p>{claimMessage}</p>
-            </div>
-          )}
-
           <div className="mt-4 mb-8 bg-gray-800 p-2 pb-2 rounded-lg">
             <GroupList groups={userInfo.group} />
           </div>
