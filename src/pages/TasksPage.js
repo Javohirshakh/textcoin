@@ -74,7 +74,7 @@ function TasksPage() {
             {task.status && (
               <button 
                 className="task-button bg-green-500 hover:bg-green-700 text-white py-1 px-3 rounded ml-4" 
-                onClick={() => window.open(task.url, "_blank")}
+                onClick={() => (window.location.href = task.url)} // Изменяем на навигацию в текущей вкладке
               >
                 Bajarish
               </button>
