@@ -13,7 +13,9 @@ function TasksPage() {
       const result = await GetAPI(1234, null, ["gettask"]);
       
       if (result.status) {
-        setTasks(result.gettask);
+        // Сортируем задачи так, чтобы выполненные были внизу
+        const sortedTasks = result.gettask.sort((a, b) => a.status === b.status ? 0 : a.status ? -1 : 1);
+        setTasks(sortedTasks);
       } else {
         alert("Vazifalar topilmadi.");
       }
@@ -35,7 +37,8 @@ function TasksPage() {
       if (result.status) {
         alert(result.msg || "Vazifa muvaffaqiyatli bajarildi!"); // Показываем успешное сообщение
         tasks[index].status = false; // Обновляем статус задачи на "выполнено"
-        setTasks([...tasks]); // Обновляем состояние для повторного рендеринга
+        const updatedTasks = [...tasks].sort((a, b) => a.status === b.status ? 0 : a.status ? -1 : 1);
+        setTasks(updatedTasks); // Обновляем состояние для повторного рендеринга
       } else {
         alert(result.msg || "Xato: Vazifani tekshirib bo'lmadi, keyinroq urinib ko'ring.");
       }
