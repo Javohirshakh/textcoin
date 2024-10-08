@@ -45,25 +45,25 @@ function ReferralPage() {
   return (
     <>
       <h2 className="text-3xl font-bold">Do'stlar</h2>
-      <div className="referral-container mt-4 bg-gray-800 p-4 rounded-lg text-left">
+      <div className="referral-container mt-4 bg-gray-800 p-2 rounded-lg text-left text-xl">
         {referralData ? (
           <>
-            <p>Chaqirilgan do'stlar: {referralData.count}</p>
-            <p>Do'stlardan kelgan to'lovlar: {referralData.ref_pul} UZS</p>
+            <span className='text-sm'>Chaqirilgan do'stlar: {referralData.count}</span><br></br>
+            <span className='text-sm'>Do'stlardan kelgan to'lovlar: {referralData.ref_pul} UZS</span>
           </>
         ) : (
           <p>Siz hali do'stlaringizni chaqirmagansiz.</p>
         )}
 
-        <div className="flex items-center sharebutton">
+        <div className="flex items-center mt-1 sharebutton">
           <button 
-            className="w-full bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded"
+            className="w-full bg-green-500 hover:bg-green-700 text-white py-1 px-2 rounded"
             onClick={handleShare}
           >
             Do'stlaringiz bilan bo'lishing
           </button>
           <button 
-            className="ml-4 bg-blue-500 hover:bg-blue-700 text-white py-2 px-2 rounded"
+            className="ml-4 bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded"
             onClick={handleCopy}
           >
             <span className="material-icons">content_copy</span> {/* Иконка копирования */}
