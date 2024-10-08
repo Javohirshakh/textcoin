@@ -7,3 +7,11 @@
   .referral-container p {
     margin: 10px 0;
   }
+.sharebutton {
+    display: flex;
+    height: 40px;
+    font-size: 12px;
+}
+.sharebutton span {
+    font-size: 14px;
+}
