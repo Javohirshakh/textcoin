@@ -26,7 +26,7 @@ function Footer() {
 
         {/* Страница Do'stlar (Рефералки) */}
         <NavLink 
-          to="/referrals" 
+          to="/referralPage" 
           className={({ isActive }) => `nav-item ${isActive ? 'active-tab' : ''}`}
         >
           <span className="material-icons">group</span> 

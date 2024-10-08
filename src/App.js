@@ -5,7 +5,7 @@ import Footer from './components/Footer';
 import Modal from './components/Modal';
 import HomePage from './pages/HomePage';
 import GroupsPage from './pages/GroupsPage';
-import BonusesPage from './pages/BonusesPage';
+import ReferralPage from './pages/ReferralPage';
 import TasksPage from './pages/TasksPage';
 import UserPage from './pages/UserPage';
 import { UserProvider } from './context/UserContext'; 
@@ -22,7 +22,7 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/groupsPage" element={<GroupsPage />} />
-              <Route path="/bonuses" element={<BonusesPage />} />
+              <Route path="/referralPage" element={<ReferralPage />} />
               <Route path="/userPage" element={<UserPage />} />
               <Route path="/tasksPage" element={<TasksPage />} />
             </Routes>
