@@ -23,7 +23,7 @@ function ReferralPage() {
   }, []);
 
   const handleShare = () => {
-    const shareUrl = `https://t.me/share/url?url=https://yourwebsite.com&text=TextCoinga ulan va biz bilan pul ishla!`;
+    const shareUrl = `https://t.me/share/url?url=https://t.me/textcoinro_bot?start=1&text=TextCoinga ulan va xabar yozib bilan pul ishla!`;
     window.open(shareUrl, '_blank'); // Opens Telegram share link in new tab
   };
   
