@@ -24,7 +24,8 @@ function ReferralPage() {
 
   const handleShare = () => {
     if (window.Telegram.WebApp) {
-      window.Telegram.WebApp.openChat({ 
+        console.log(window.Telegram.WebApp)
+      window.Telegram.WebApp.shareText({ 
         text: "TextCoinga ulan va biz bilan pul ishla!" 
       });
     } else {
