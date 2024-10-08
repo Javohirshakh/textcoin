@@ -23,15 +23,10 @@ function ReferralPage() {
   }, []);
 
   const handleShare = () => {
-    if (window.Telegram.WebApp) {
-        console.log(window.Telegram.WebApp)
-      window.Telegram.WebApp.sendData({ 
-        text: "TextCoinga ulan va biz bilan pul ishla!" 
-      });
-    } else {
-      alert("Telegram orqali oching!");
-    }
+    const shareUrl = `https://t.me/share/url?url=https://yourwebsite.com&text=TextCoinga ulan va biz bilan pul ishla!`;
+    window.open(shareUrl, '_blank'); // Opens Telegram share link in new tab
   };
+  
 
   if (isLoading) {
     return <Loader />;
