@@ -1,6 +1,6 @@
 /* Стиль для контейнера */
 .tasks-container {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
   }
   
   /* Стиль для каждого элемента задания */
@@ -12,6 +12,7 @@
     border-radius: 10px;
     margin-bottom: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #3a89f9;
     transition: all 0.3s ease;
   }
   .task-item:last-child {

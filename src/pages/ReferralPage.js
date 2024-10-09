@@ -45,7 +45,7 @@ function ReferralPage() {
   return (
     <>
       <h2 className="text-3xl font-bold">Do'stlar</h2>
-      <div className="referral-container mt-4 bg-gray-800 p-2 rounded-lg text-left text-xl">
+      <div className="referral-container mt-4 p-2 rounded-lg text-left text-xl">
         {referralData ? (
           <>
             <span className='text-sm'>Chaqirilgan do'stlar: {referralData.count}</span><br></br>
@@ -63,7 +63,7 @@ function ReferralPage() {
             Do'stlaringiz bilan bo'lishing
           </button>
           <button 
-            className="ml-4 bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded"
+            className="ml-4 bg-green-500 hover:bg-green-700 text-white py-1 px-2 rounded"
             onClick={handleCopy}
           >
             <span className="material-icons">content_copy</span> {/* Иконка копирования */}
