@@ -1,7 +1,7 @@
 /* Основной фон */
 body {
-    background: linear-gradient(180deg, rgba(36,37,38,1) 0%, rgba(60,52,39,1) 50%, rgba(17,17,17,1) 100%);
-    color: #fff;
+    background: rgba(173, 201, 243, 0.5);
+    color: #000;
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;

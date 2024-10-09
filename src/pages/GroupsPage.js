@@ -50,16 +50,16 @@ function GroupsPage() {
     return (
       <div>
         {groups.map((group, index) => (
-          <div key={index} className="flex justify-between items-center bg-gray-700 p-2 rounded-lg item">
+          <div key={index} className="flex justify-between items-center p-2 rounded-lg item">
             <div className="flex items-center group_item">
               <img src={group.img} alt={group.name} className="w-12 h-12 rounded-full mr-4" />
               <div className="flex flex-col w-full text-left">
                 <p className="text-white font-bold">{group.name}</p>
-                <div className="flex justify-between text-xs text-gray-400">
+                <div className="flex justify-between text-xs">
                   <span>Xabarlar:</span>
                   <span>{group.xabarlar} ta</span>
                 </div>
-                <div className="flex justify-between text-xs text-gray-400">
+                <div className="flex justify-between text-xs">
                   <span>Jami pul:</span>
                   <span>{group.jami_pul} UZS</span>
                 </div>
@@ -84,7 +84,7 @@ function GroupsPage() {
       ) : (
         <>
           <h2 className="text-3xl font-bold">Guruhlar</h2>
-          <div className="mt-4 mb-8 bg-gray-800 p-2 pb-2 rounded-lg">
+          <div className="groups mt-4 mb-8 p-2 pb-2 rounded-lg">
             <GroupList groups={userInfo.group} />
           </div>
         </>

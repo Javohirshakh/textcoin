@@ -1,4 +1,8 @@
+.groups > div > div {
+  background: #3a89f9;
+}
 .group_item {
+  color: #fff;
     width: 100%;
 }
 .item {

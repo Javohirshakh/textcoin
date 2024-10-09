@@ -1,4 +1,6 @@
 import React from 'react';
+import './header.css';
+
 
 function Header() {
   const openModal = () => {
@@ -10,7 +12,7 @@ function Header() {
 
   return (
     <header className="p-4 flex justify-between items-center">
-      <div className="wallet-container" onClick={openModal}>
+      <div className="header wallet-container" onClick={openModal}>
         <span className="material-icons wallet-icon">account_balance_wallet</span>
         <span className="wallet-text">Xabar yoz va pul ishla 🤑</span>
       </div>
