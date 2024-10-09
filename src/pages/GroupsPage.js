@@ -59,7 +59,7 @@ function GroupsPage() {
                   <span>Xabarlar:</span>
                   <span>{group.xabarlar} ta</span>
                 </div>
-                <div className="flex justify-between text-xs">
+                <div className="flex justify-between text-xs  ">
                   <span>Jami pul:</span>
                   <span>{group.jami_pul} UZS</span>
                 </div>
