@@ -17,7 +17,7 @@ function WithdrawPage() {
       webApp.BackButton.show(); // Показываем кнопку "Назад"
 
       webApp.BackButton.onClick(() => {
-        navigate('/user'); // Возвращаемся на страницу UserPage
+        navigate('/userPage'); // Возвращаемся на страницу UserPage
       });
 
       return () => {
