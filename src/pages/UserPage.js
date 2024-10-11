@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom'; // Импортируем хук для навигации
 import { GetAPI } from '../api/api';
-import Loader from '../components/Loader'; // Импортируем лоадер
-import { useUser } from '../context/UserContext'; // Импортируем хук для получения данных пользователя
+import Loader from '../components/Loader';
+import { useUser } from '../context/UserContext';
 
 function UserPage() {
   const [userInfo, setUserInfo] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const mounted = useRef(true);
+  const navigate = useNavigate(); // Создаем навигатор
   
-  // Получаем данные пользователя из контекста
   const user = useUser();
 
   useEffect(() => {
@@ -28,21 +29,33 @@ function UserPage() {
     };
   }, []);
 
+  const handleWithdraw = () => {
+    navigate('/withdraw'); // Перенаправляем пользователя на страницу вывода
+  };
+
   return (
     <>
-      {isLoading && <Loader />} {/* Показываем лоадер */}
+      {isLoading && <Loader />}
       {!isLoading && (
-        <>
-          <h2 className="text-3xl font-bold">
-            {/* Используем имя пользователя из контекста */}
-            Salom, {user?.name || 'Mehmon'}!
-          </h2>
-          <h2 className="text-3xl font-bold">
-            {/* Отображаем Jami pul */}
-            Jami pul: {userInfo.jami_pul ? userInfo.jami_pul : '0'} UZS
-          </h2>
-          {/* Остальной контент */}
-        </>
+        <div className="user-info-container">
+          <h2 className="text-3xl font-bold">Salom, {user?.name || 'Mehmon'}!</h2>
+
+          <div className="user-info-grid">
+            <div className="user-info-card">
+              <p><strong>Число групп:</strong> {userInfo.azo_guruhlari || 0}</p>
+              <p><strong>Сегодняшний пост:</strong> {userInfo.bugungi_post || 0} UZS</p>
+              <p><strong>Карта:</strong> {userInfo.card || 'Не указана'}</p>
+              <p><strong>Всего заработано:</strong> {userInfo.jami_pul || 0} UZS</p>
+            </div>
+          </div>
+
+          <button 
+            onClick={handleWithdraw} 
+            className="w-full bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded mt-4"
+          >
+            Вывести деньги
+          </button>
+        </div>
       )}
     </>
   );

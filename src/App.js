@@ -8,6 +8,7 @@ import GroupsPage from './pages/GroupsPage';
 import ReferralPage from './pages/ReferralPage';
 import TasksPage from './pages/TasksPage';
 import UserPage from './pages/UserPage';
+import WithdrawPage from './pages/WithdrawPage';
 import { UserProvider } from './context/UserContext'; 
 import './styles.css';
 
@@ -24,6 +25,7 @@ function App() {
               <Route path="/groupsPage" element={<GroupsPage />} />
               <Route path="/referralPage" element={<ReferralPage />} />
               <Route path="/userPage" element={<UserPage />} />
+              <Route path="/withdraw" element={<WithdrawPage />} />
               <Route path="/tasksPage" element={<TasksPage />} />
             </Routes>
           </main>

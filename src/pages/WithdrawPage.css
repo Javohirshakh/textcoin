@@ -1,0 +1,66 @@
+.withdraw-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    text-align: center;
+    color: #333;
+  }
+  
+  .payment-type-selection {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+  }
+  
+  .payment-type {
+    padding: 10px 20px;
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: white;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .payment-type:hover {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .payment-type.active {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .withdraw-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  input {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  
+  .submit-button {
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  
+  .submit-button:hover {
+    background-color: #0056b3;
+  }
+  
