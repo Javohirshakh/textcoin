@@ -38,10 +38,10 @@ function WithdrawPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!paymentType || !account || !amount) {
-      setError('Пожалуйста, заполните все поля.');
+      setError('Hammasini to\'ldiring!');
       return;
     }
-    alert(`Вывод на ${paymentType}: ${amount} UZS на счет ${account}.`);
+    alert(`${paymentType}ga ${amount} UZS ushbu hisobga ${account} chiqarildi.`);
   };
 
   return (

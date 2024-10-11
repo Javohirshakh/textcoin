@@ -42,10 +42,10 @@ function UserPage() {
 
           <div className="user-info-grid">
             <div className="user-info-card">
-              <p><strong>Число групп:</strong> {userInfo.azo_guruhlari || 0}</p>
-              <p><strong>Сегодняшний пост:</strong> {userInfo.bugungi_post || 0} UZS</p>
-              <p><strong>Карта:</strong> {userInfo.card || 'Не указана'}</p>
-              <p><strong>Всего заработано:</strong> {userInfo.jami_pul || 0} UZS</p>
+              <p><strong>Guruhlar soni:</strong> {userInfo.azo_guruhlari || 0}</p>
+              <p><strong>Bugungi postlar:</strong> {userInfo.bugungi_post || 0}</p>
+              <p><strong>Ko'rsatilmagan:</strong> {userInfo.card || 'Ko\'rsatilmagan'}</p>
+              <p><strong>Umumiy balans:</strong> {userInfo.jami_pul || 0} UZS</p>
             </div>
           </div>
 
@@ -53,7 +53,7 @@ function UserPage() {
             onClick={handleWithdraw} 
             className="w-full bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded mt-4"
           >
-            Вывести деньги
+            Pul yechish
           </button>
         </div>
       )}
