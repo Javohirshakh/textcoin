@@ -1,30 +1,49 @@
 import React, { useState, useEffect } from 'react';
-import './WithdrawPage.css'; // Импортируем стили
-import { useNavigate } from 'react-router-dom'; // Для навигации между страницами
+import './WithdrawPage.css'; 
+import { useNavigate } from 'react-router-dom'; 
 
 function WithdrawPage() {
   const [paymentType, setPaymentType] = useState('');
   const [account, setAccount] = useState('');
   const [amount, setAmount] = useState('');
   const [error, setError] = useState('');
-  const navigate = useNavigate(); // Хук для навигации
+  const navigate = useNavigate(); 
 
   // Включаем кнопку "Назад" в Telegram WebApp и добавляем обработчик
   useEffect(() => {
     const webApp = window.Telegram.WebApp;
 
     if (webApp) {
-      webApp.BackButton.show(); // Показываем кнопку "Назад"
+      webApp.BackButton.show(); 
 
       webApp.BackButton.onClick(() => {
-        navigate('/userPage'); // Возвращаемся на страницу UserPage
+        navigate('/userPage'); 
       });
 
       return () => {
-        webApp.BackButton.hide(); // Прячем кнопку "Назад" при уходе со страницы
+        webApp.BackButton.hide(); 
       };
     }
   }, [navigate]);
+
+  // Форматирование номера карты с пробелами
+  const formatCardNumber = (value) => {
+    const cleaned = value.replace(/\D/g, ''); // Удаляем все нецифровые символы
+    const formatted = cleaned.match(/.{1,4}/g)?.join(' ') || ''; // Добавляем пробелы после каждых 4 цифр
+    return formatted;
+  };
+
+  // Обработчик изменения поля для ввода
+  const handleAccountChange = (e) => {
+    let value = e.target.value;
+
+    // Применяем форматирование только если выбран тип оплаты "Карта"
+    if (paymentType === 'card') {
+      value = formatCardNumber(value);
+    }
+
+    setAccount(value);
+  };
 
   // Обработчик для выбора типа оплаты
   const handlePaymentTypeChange = (type) => {
@@ -37,10 +56,14 @@ function WithdrawPage() {
   // Обработчик для отправки формы
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!paymentType || !account || !amount) {
-      setError('Hammasini to\'ldiring!');
+
+    // Если выбран тип оплаты "Карта", проверяем, что номер карты имеет 16 цифр
+    const cleanAccount = account.replace(/\s/g, ''); 
+    if (!paymentType || (paymentType === 'card' && cleanAccount.length !== 16) || !amount) {
+      setError('Hammasini to\'ldiring va kartani to\'g\'ri kiriting!');
       return;
     }
+
     alert(`${paymentType}ga ${amount} UZS ushbu hisobga ${account} chiqarildi.`);
   };
 
@@ -69,11 +92,13 @@ function WithdrawPage() {
         <form onSubmit={handleSubmit} className="withdraw-form">
           <label className="block mb-2">Chiqarish uchun hisob:</label>
           <input 
-            type="text" 
+            type={paymentType === 'card' ? 'text' : 'number'} 
             value={account}
-            onChange={(e) => setAccount(e.target.value)}
+            onChange={handleAccountChange}
             className="w-full mb-4 p-2 border rounded" 
             placeholder={paymentType === 'card' ? 'Kartani kiriting' : 'Payeer ID kiriting'} 
+            maxLength={paymentType === 'card' ? 19 : undefined}
+            required 
           />
 
           <label className="block mb-2">Chiqarish summasi:</label>
@@ -81,8 +106,9 @@ function WithdrawPage() {
             type="number" 
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            className="w-full mb-4 p-2 border rounded" 
+            className="w-full mb-4 p-2 border rounded remove-arrows" 
             placeholder="Summani kiriting" 
+            required
           />
 
           {/* Кнопка для подтверждения */}
