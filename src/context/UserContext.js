@@ -15,6 +15,7 @@ export const UserProvider = ({ children }) => {
         setUser({
           name: userData.first_name,
           profilePhoto: userData.photo_url || null, 
+          user: user
         });
       } else {
         setUser({ name: 'Mehmon', profilePhoto: null });
