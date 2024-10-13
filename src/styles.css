@@ -1,6 +1,7 @@
 /* Основной фон */
 body {
-    background: rgb(173, 201, 243);
+    background: #fff;
+    /* background: rgb(173, 201, 243); */
     /* background-image: url('../public/01.jpg');
     background-repeat: repeat!important;
     background-size: 50%!important; */
