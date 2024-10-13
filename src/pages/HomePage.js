@@ -3,12 +3,13 @@ import { useUser } from '../context/UserContext';
 
 function HomePage() {
   const user = useUser();
+  console.log(user)
 
   return (
     <>
       <h1 className="text-2xl font-bold">
         Salom, {user ? user.name : 'Mehmon'}! <br></br>
-        img: {user ? user.profilePhoto : 'no'}
+        img: {user.profilePhoto!==null ? 'not null' : 'no'}
       </h1>
 
       {user?.profilePhoto && (
