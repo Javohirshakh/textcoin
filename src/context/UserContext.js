@@ -8,10 +8,18 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    // Получаем данные пользователя через Telegram WebApp SDK
     if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe) {
       const userData = window.Telegram.WebApp.initDataUnsafe.user;
-      setUser(userData ? { name: userData.first_name } : { name: 'Mehmon' });
+
+      if (userData) {
+        // Сохраняем имя и URL фотографии профиля
+        setUser({
+          name: userData.first_name,
+          profilePhoto: userData.photo_url || null, // Проверяем, если фото есть
+        });
+      } else {
+        setUser({ name: 'Mehmon', profilePhoto: null });
+      }
     }
   }, []);
 

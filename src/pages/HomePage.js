@@ -1,8 +1,8 @@
 import React from 'react';
-import { useUser } from '../context/UserContext'; // Подключаем хук для работы с пользователем
+import { useUser } from '../context/UserContext';
 
 function HomePage() {
-  const user = useUser(); // Получаем данные пользователя через контекст
+  const user = useUser();
 
   return (
     <>
@@ -11,13 +11,11 @@ function HomePage() {
       </h1>
 
       {user?.profilePhoto && (
-        <div className="mt-4">
-          <img 
-            src={user.profilePhoto} 
-            alt={`${user.name}'s profile`} 
-            className="w-24 h-24 rounded-full border-2 border-gray-300 shadow-lg" 
-          />
-        </div>
+        <img 
+          src={user.profilePhoto} 
+          alt="Profile" 
+          className="w-24 h-24 rounded-full border-2 border-gray-300 shadow-lg mt-4" 
+        />
       )}
     </>
   );
