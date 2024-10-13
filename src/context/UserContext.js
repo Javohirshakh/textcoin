@@ -9,7 +9,7 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe) {
-      const userData = window.Telegram.WebApp.initDataUnsafe.user;
+      const userData = window.Telegram.WebApp.initDataUnsafe;
 
       if (userData) {
         setUser({
