@@ -14,14 +14,13 @@ export const UserProvider = ({ children }) => {
       if (userData) {
         setUser({
           name: userData.first_name,
-          profilePhoto: userData.photo_url || null, 
-          user: user
+          profilePhoto: userData.photo_url || null,
         });
       } else {
         setUser({ name: 'Mehmon', profilePhoto: null });
       }
     }
-  }, []);
+  }, []); // Нет больше использования 'user', массив зависимостей пуст
 
   return (
     <UserContext.Provider value={user}>
