@@ -7,7 +7,8 @@ function HomePage() {
   return (
     <>
       <h1 className="text-2xl font-bold">
-        Salom, {user ? user.name : 'Mehmon'}!
+        Salom, {user ? user.name : 'Mehmon'}! <br></br>
+        img: {user ? user.profilePhoto : 'no'}
       </h1>
 
       {user?.profilePhoto && (
