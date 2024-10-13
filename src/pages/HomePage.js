@@ -22,7 +22,7 @@ function HomePage() {
 
       {/* Отображаем все данные пользователя как строку для отладки */}
       {user?.user && (
-      <pre className="mt-4 bg-gray-100 p-2 rounded shadow">
+      <pre className="mt-4 bg-gray-100 p-2 rounded shadow text-left">
         user:
         {JSON.stringify(user.user, null, 2)}
       </pre>
