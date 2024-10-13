@@ -8,8 +8,7 @@ function HomePage() {
   return (
     <>
       <h1 className="text-2xl font-bold">
-        Salom, {user ? user.name : 'Mehmon'}! <br></br>
-        img: {user.profilePhoto!==null ? 'not null' : 'no'}
+        Salom, {user ? user.name : 'Mehmon'}! 
       </h1>
 
       {user?.profilePhoto && (

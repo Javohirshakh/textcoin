@@ -12,10 +12,9 @@ export const UserProvider = ({ children }) => {
       const userData = window.Telegram.WebApp.initDataUnsafe.user;
 
       if (userData) {
-        // Сохраняем имя и URL фотографии профиля
         setUser({
           name: userData.first_name,
-          profilePhoto: userData.photo_url || null, // Проверяем, если фото есть
+          profilePhoto: userData.photo_url || null, 
         });
       } else {
         setUser({ name: 'Mehmon', profilePhoto: null });
