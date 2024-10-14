@@ -9,7 +9,7 @@ function HomePage() {
   const [isLoading, setIsLoading] = useState(true);
   const mounted = useRef(true);
   const user = useUser();
-  const defaultPhoto = 'https://via.placeholder.com/150'; 
+  const defaultPhoto = './user.png'; 
 
   useEffect(() => {
     const fetchData = async () => {

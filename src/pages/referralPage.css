@@ -13,6 +13,26 @@
     height: 40px;
     font-size: 12px;
 }
+.share {
+  animation: share 2s infinite;
+}
+@keyframes share {
+  0% {transform: scale(1);}
+  50% {transform: scale(0.9);}
+  100% {transform: scale(1);}
+}
+
 .sharebutton span {
     font-size: 14px;
 }
+
+.invited-users h3 {
+  color: #000;
+}
+
+.user-item {
+  background-color: #3a89f9;
+  color: #fff;
+  transition: background-color 0.3s;
+}
+
