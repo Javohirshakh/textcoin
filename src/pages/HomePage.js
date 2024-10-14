@@ -58,7 +58,7 @@ function HomePage() {
         <ul className="flex gap-2">
           <li>
             <a
-              href="https://t.me/yourchannel"
+              href="https://t.me/zolimbot"
               target="_blank"
               rel="noopener noreferrer"
               className="social-icon"
