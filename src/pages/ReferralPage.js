@@ -65,6 +65,10 @@ function ReferralPage() {
     <>
       <h2 className="text-3xl font-bold">Do'stlar</h2>
       <div className="referral-container mt-4 p-2 rounded-lg text-left text-xl">
+
+          <span className="ref-text">
+              Ko'proq do'stlaringizni chaqiring va yanada ko'proq pul ishlang! Har bir chaqirgan do'stingiz uchun <b>500 UZS</b> dan oling. <br></br>
+            </span>
         {referralData ? (
           <>
             <span className="text-sm">
