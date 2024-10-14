@@ -53,8 +53,8 @@ function HomePage() {
         </div>
       </div>
 
-      <div className="social-links p-2 rounded-lg shadow-lg">
-        <h2 className="text-lg font-bold mb-2">Bizning sahifalarimiz:</h2>
+      <div className="social-links">
+        <h2 className="text-lg text-left font-bold mb-2">Bizning sahifalarimiz:</h2>
         <ul className="flex gap-2">
           <li>
             <a
