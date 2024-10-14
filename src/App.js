@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import SplashScreen from './components/SplashScreen';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Modal from './components/Modal';
@@ -13,11 +14,13 @@ import { UserProvider } from './context/UserContext';
 import './styles.css';
 
 function App() {
+  const [showSplash, setShowSplash] = useState(true);
 
   return (
     <UserProvider>
       <Router>
         <div className="App">
+        {showSplash && <SplashScreen onFinish={() => setShowSplash(false)} />}
           <Header />
           <main className="container mx-auto text-center p-2 pb-20" id="main-content">
             <Routes>

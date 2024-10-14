@@ -1,0 +1,65 @@
+/* A1A1A1 */
+
+/* Сплэш-скрин занимает весь экран */
+.splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #3a89f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99990; /* Показывается над всем контентом */
+  }
+  
+  /* Логотип в центре */
+  .logo-animation {
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: moveLogoUp 1.5s ease-in-out 3s forwards; /* Анимация логотипа */
+  }
+  
+  /* Анимация смещения логотипа вверх */
+  @keyframes moveLogoUp {
+    0% {
+      transform: translate(-50%, -50%);
+    }
+    100% {
+      transform: translate(-50%, -100px); /* Смещаем логотип вверх */
+    }
+  }
+  
+  /* Текст, который появляется после логотипа */
+  .ending-text {
+    position: absolute;
+    top: 60%; /* Располагаем текст ниже логотипа */
+    display: block;
+    width: 80%;
+    margin: auto;
+    color: #fff;
+    font-size: 16px;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 2px;
+    opacity: 0; /* Текст скрыт в начале */
+    animation: textAnimation 1.5s ease-in-out 4s forwards; /* Появляется через 4 секунды */
+  }
+  
+  /* Анимация для текста */
+  @keyframes textAnimation {
+    0% {
+      opacity: 0;
+      transform: translateX(-50%) translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+  

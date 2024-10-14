@@ -76,7 +76,7 @@ function ReferralPage() {
             </span>
             <br />
             <span className="text-sm">
-              Do'stlardan kelgan to'lovlar: {referralData.ref_pul} UZS
+              Do'stlardan kelgan foyda: {referralData.ref_pul} UZS
             </span>
           </>
         ) : (
