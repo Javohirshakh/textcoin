@@ -1,33 +1,30 @@
 import React from 'react';
-import { useUser } from '../context/UserContext';
+import { useUser } from '../context/UserContext'; 
+import './homePage.css';
 
 function HomePage() {
   const user = useUser();
-  
-  console.log(user); // Логируем данные пользователя в консоль для проверки
+  const defaultPhoto = 'https://via.placeholder.com/150'; // Дефолтное фото профиля
 
   return (
-    <>
-      <h1 className="text-2xl font-bold">
-        Salom, {user ? user.name : 'Mehmon'}!
-      </h1>
+    <div className="flex items-center p-2 user rounded-lg">
+      {/* Фото профиля или дефолтное изображение */}
+      <img
+        src={user?.profilePhoto || defaultPhoto}
+        alt="Profile"
+        className="w-16 h-16 rounded-full border-2 border-gray-300 shadow-lg"
+      />
 
-      {user?.profilePhoto && (
-        <img 
-          src={user.profilePhoto} 
-          alt="Profile" 
-          className="w-24 h-24 rounded-full border-2 border-gray-300 shadow-lg mt-4" 
-        />
-      )}
-
-      {/* Отображаем все данные пользователя как строку для отладки */}
-      {user?.user && (
-      <pre className="mt-4 bg-gray-100 p-2 rounded shadow text-left">
-        user:
-        {JSON.stringify(user.user, null, 2)}
-      </pre>
-      )}
-    </>
+      {/* Имя пользователя и баланс */}
+      <div className="ml-4 text-left">
+        <h1 className="text-xl font-bold">
+          {user ? user.name : 'Mehmon'}!
+        </h1>
+        <p className="text-lg mt-2">
+          Balans: {user?.user?.jami_pul || 0} UZS
+        </p>
+      </div>
+    </div>
   );
 }
 
