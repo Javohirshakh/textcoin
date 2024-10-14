@@ -1,4 +1,44 @@
 .user {
     background-color: #3a89f9;
-    color: #fff;
+    color: #fff;  
 }
+.level {
+    margin-left: auto;
+}
+.level span {
+    font-size: 24px;
+}
+
+.home-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .social-links {
+    background-color: rgba(173, 201, 243, 0.4);
+  }
+  .social-links ul {
+    display: flex;
+    flex-direction: column;
+  }
+  .social-links h2 {
+    color: #333;
+  }
+  
+  .social-icon {
+    padding: 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    background-color: #3a89f9;
+    display: block;
+    text-align: left;
+  }
+  
+  .social-icon:hover {
+    opacity: 0.8;
+  }
+  
