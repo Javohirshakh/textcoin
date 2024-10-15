@@ -1,4 +1,44 @@
 .header {
-    background-color: #3a89f9;
-    color: #fff;
+  background-color: #3a89f9;
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
+
+.wallet-icon {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+.wallet-container {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wallet-text {
+  font-weight: bold;
+}
+
+.wallet-text-with-progress {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.mini-progress-bar {
+  width: 160px;
+  margin-left: 5px;
+  height: 6px;
+  background-color: #ddd;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.mini-progress {
+  height: 100%;
+  background-color: #4caf50;
+  transition: width 0.3s ease-in-out;
 }
