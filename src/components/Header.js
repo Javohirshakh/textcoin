@@ -11,7 +11,7 @@ function Header() {
   };
 
   return (
-    <header className="p-4 flex justify-between items-center">
+    <header className="p-1 flex justify-between items-center">
       <div className="header wallet-container" onClick={openModal}>
         <span className="material-icons wallet-icon">account_balance_wallet</span>
         <span className="wallet-text">Xabar yoz va pul ishla 🤑</span>

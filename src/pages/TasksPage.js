@@ -55,7 +55,7 @@ function TasksPage() {
   return (
     <>
       <h2 className="text-3xl font-bold">Vazifalar</h2> 
-      <div className="tasks-container mt-4 mb-8 p-2 pb-2 rounded-lg">
+      <div className="tasks-container mt-4 mb-8 pb-2 rounded-lg">
         {tasks.map((task, index) => (
           <div key={index} className="task-item">
             <div className="task-info">
