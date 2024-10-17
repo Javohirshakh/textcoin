@@ -8,7 +8,7 @@ import './homePage.css';
 function ObjectDisplayPage({ data }) {
   return (
     <div className="object-display-container">
-      <h2>Объектные данные</h2>
+      <h2>LOG</h2>
       <pre className="json-display">
         {JSON.stringify(data, null, 2)}
       </pre>
