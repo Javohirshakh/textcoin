@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { GetAPI } from '../api/api';
+import { useUser } from '../context/UserContext'; 
 import Loader from '../components/Loader';
 import './referralPage.css';
 
@@ -7,6 +8,7 @@ function ReferralPage() {
   const [referralData, setReferralData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isCopied, setIsCopied] = useState(false);
+  const user = useUser()
 
   // Мок-данные для списка приглашенных пользователей
   const mockInvitedUsers = [
@@ -32,7 +34,7 @@ function ReferralPage() {
 
   useEffect(() => {
     const fetchReferralData = async () => {
-      const result = await GetAPI(777, null, ["ref"]);
+      const result = await GetAPI(user.user.id, null, ["ref"]);
       if (result.status) {
         setReferralData(result.ref);
       } else {
@@ -42,7 +44,7 @@ function ReferralPage() {
     };
 
     fetchReferralData();
-  }, []);
+  }, [user?.user?.id]);
 
   const handleShare = () => {
     const shareUrl = `https://t.me/share/url?url=https://t.me/textcoinro_bot?start=1&text=TextCoinga ulan va xabar yozib bilan pul ishla!`;

@@ -27,7 +27,7 @@ function GroupsPage() {
     try {
       console.log(`Отправляем запрос для группы: ${groupName}, chat_id: ${chatId}`);
       
-      const result = await GetAPI(777, "getball", { chat_id: chatId });
+      const result = await GetAPI(user.user.id, "getball", { chat_id: chatId });
 
       console.log("Ответ от API:", result); 
 
