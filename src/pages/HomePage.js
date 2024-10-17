@@ -5,18 +5,17 @@ import { useUser } from '../context/UserContext';
 import './homePage.css';
 
 
-// function ObjectDisplayPage({ data }) {
-//   return (
-//     <div className="object-display-container">
-//       <h2>Объектные данные</h2>
-//       <pre className="json-display">
-//         {JSON.stringify(data, null, 2)}
-//       </pre>
-//     </div>
-//   );
-// }
+function ObjectDisplayPage({ data }) {
+  return (
+    <div className="object-display-container">
+      <h2>Объектные данные</h2>
+      <pre className="json-display">
+        {JSON.stringify(data, null, 2)}
+      </pre>
+    </div>
+  );
+}
 
-/* <ObjectDisplayPage data={user.user} /> */
 
 function HomePage() {
   const [userInfo, setUserInfo] = useState({});
@@ -66,6 +65,7 @@ function HomePage() {
           daraja
         </div>
       </div>
+       <ObjectDisplayPage data={user.user} />
 
 
       <div className="social-links">

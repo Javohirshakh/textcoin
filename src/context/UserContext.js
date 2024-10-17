@@ -18,7 +18,7 @@ export const UserProvider = ({ children }) => {
           user: userData
         });
       } else {
-        setUser({ name: 'Mehmon', profilePhoto: null, user: 'null' });
+        setUser({ name: 'Mehmon', profilePhoto: null, user: null });
       }
     }
   }, []); // Нет больше использования 'user', массив зависимостей пуст
