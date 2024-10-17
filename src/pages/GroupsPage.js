@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useUser } from '../context/UserContext'; 
 import { GetAPI } from '../api/api';
 import Loader from '../components/Loader';
 import './groups.css';
 
 function GroupsPage() {
+  const user = useUser()
   const [userInfo, setUserInfo] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
@@ -11,7 +13,7 @@ function GroupsPage() {
     let mounted = true;
     setIsLoading(true);
 
-    GetAPI(777, null, ["group"]).then(info => {
+    GetAPI(user.user.id, null, ["group"]).then(info => {
       if (mounted) {
         setUserInfo(info);
         setIsLoading(false);
@@ -19,7 +21,7 @@ function GroupsPage() {
     });
 
     return () => mounted = false;
-  }, []);
+  }, [user?.user?.id]);
 
   const handleClaim = async (groupName, chatId) => {
     try {

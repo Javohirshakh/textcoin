@@ -5,16 +5,18 @@ import { useUser } from '../context/UserContext';
 import './homePage.css';
 
 
-function ObjectDisplayPage({ data }) {
-  return (
-    <div className="object-display-container">
-      <h2>Объектные данные</h2>
-      <pre className="json-display">
-        {JSON.stringify(data, null, 2)}
-      </pre>
-    </div>
-  );
-}
+// function ObjectDisplayPage({ data }) {
+//   return (
+//     <div className="object-display-container">
+//       <h2>Объектные данные</h2>
+//       <pre className="json-display">
+//         {JSON.stringify(data, null, 2)}
+//       </pre>
+//     </div>
+//   );
+// }
+
+/* <ObjectDisplayPage data={user.user} /> */
 
 function HomePage() {
   const [userInfo, setUserInfo] = useState({});
@@ -26,7 +28,7 @@ function HomePage() {
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
-      const info = await GetAPI(777, null, ["user_info"]);
+      const info = await GetAPI(user.user.id, null, ["user_info"]);
       if (mounted.current) {
         setUserInfo(info.user_info);
         setIsLoading(false);
@@ -38,7 +40,7 @@ function HomePage() {
     return () => {
       mounted.current = false;
     };
-  }, []);
+  }, [user?.user?.id]);
 
   if (isLoading) {
     return <Loader />;
@@ -65,7 +67,6 @@ function HomePage() {
         </div>
       </div>
 
-      <ObjectDisplayPage data={user.user} />
 
       <div className="social-links">
         <h2 className="text-lg text-left font-bold mb-2">Bizning sahifalarimiz:</h2>

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useUser } from '../context/UserContext'; 
 import { GetAPI } from '../api/api';  // Импортируем функцию из api.js
 
 function Modal() {
+  const user = useUser()
   const [cardNumber, setCardNumber] = useState('');
 
   const closeModal = () => {
@@ -29,7 +31,7 @@ function Modal() {
 
     try {
       const cleanCardNumber = cardNumber.replace(/\s/g, '');
-      const result = await GetAPI(777, 'savecard', { card: cleanCardNumber });
+      const result = await GetAPI(user.user.id, 'savecard', { card: cleanCardNumber });
 
       console.log("Ответ от API:", result);
 
