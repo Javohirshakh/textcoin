@@ -4,6 +4,18 @@ import Loader from '../components/Loader';
 import { useUser } from '../context/UserContext'; 
 import './homePage.css';
 
+
+function ObjectDisplayPage({ data }) {
+  return (
+    <div className="object-display-container">
+      <h2>Объектные данные</h2>
+      <pre className="json-display">
+        {JSON.stringify(data, null, 2)}
+      </pre>
+    </div>
+  );
+}
+
 function HomePage() {
   const [userInfo, setUserInfo] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -52,6 +64,8 @@ function HomePage() {
           daraja
         </div>
       </div>
+
+      <ObjectDisplayPage data={user.user} />
 
       <div className="social-links">
         <h2 className="text-lg text-left font-bold mb-2">Bizning sahifalarimiz:</h2>
