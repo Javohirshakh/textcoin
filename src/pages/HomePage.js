@@ -39,7 +39,7 @@ function HomePage() {
     return () => {
       mounted.current = false;
     };
-  }, [user?.user?.id]);
+  }, []);
 
   if (isLoading) {
     return <Loader />;
