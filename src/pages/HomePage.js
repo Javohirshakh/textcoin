@@ -18,28 +18,30 @@ function ObjectDisplayPage({ data }) {
 
 
 function HomePage() {
-  const user = useUser();
+  const user = useUser(); // Getting user from context
   const [userInfo, setUserInfo] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const mounted = useRef(true);
   const defaultPhoto = './user.png'; 
 
   useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      const info = await GetAPI(user.user.id, null, ["user_info"]);
-      if (mounted.current) {
-        setUserInfo(info.user_info);
-        setIsLoading(false);
-      }
-    };
-
-    fetchData();
+    // Only attempt to fetch if user and user.id are present
+    if (user?.user?.id) {
+      const fetchData = async () => {
+        setIsLoading(true);
+        const info = await GetAPI(user.user.id, null, ["user_info"]);
+        if (mounted.current) {
+          setUserInfo(info.user_info);
+          setIsLoading(false);
+        }
+      };
+      fetchData();
+    }
 
     return () => {
       mounted.current = false;
     };
-  }, [user?.user?.id]);
+  }, [user?.user?.id]); // Added dependency check for user.user.id
 
   if (isLoading) {
     return <Loader />;
@@ -65,8 +67,9 @@ function HomePage() {
           daraja
         </div>
       </div>
-       <ObjectDisplayPage data={user.user} />
 
+      {/* Displaying user data for debugging */}
+      <ObjectDisplayPage data={user.user} />
 
       <div className="social-links">
         <h2 className="text-lg text-left font-bold mb-2">Bizning sahifalarimiz:</h2>
