@@ -23,11 +23,17 @@ function HomePage() {
   const defaultPhoto = './user.png'; 
 
   useEffect(() => {
+    if (!user?.user?.id) {
+      // Если user.id нет, прекращаем загрузку
+      setIsLoading(false);
+      return;
+    }
+
     const fetchData = async () => {
       try {
         setIsLoading(true);
         const info = await GetAPI(user.user.id, null, ["user_info"]);
-        console.log("Получены данные от API:", info); // Логируем результат API
+        console.log("Получены данные от API:", info); 
 
         if (info && mounted.current) {
           setUserInfo(info.user_info);
@@ -38,19 +44,12 @@ function HomePage() {
         console.error("Ошибка API:", error);
       } finally {
         if (mounted.current) {
-          console.log('false')
           setIsLoading(false); // Устанавливаем isLoading на false
         }
       }
     };
 
-    if (user?.user?.id) {
-      alert(user.user.id)
-      fetchData();
-    } else {
-      setIsLoading(false); 
-      console.log('info')
-    }
+    fetchData();
 
     return () => {
       mounted.current = false;
