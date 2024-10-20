@@ -21,7 +21,7 @@ export const UserProvider = ({ children }) => {
         setUser({ name: 'Mehmon', profilePhoto: null, user: null });
       }
     }
-  }, []); // Нет больше использования 'user', массив зависимостей пуст
+  }, []); 
 
   return (
     <UserContext.Provider value={user}>

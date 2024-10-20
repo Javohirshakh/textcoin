@@ -4,7 +4,6 @@ import Loader from '../components/Loader';
 import { useUser } from '../context/UserContext'; 
 import './homePage.css';
 
-
 function ObjectDisplayPage({ data }) {
   return (
     <div className="object-display-container">
@@ -16,32 +15,44 @@ function ObjectDisplayPage({ data }) {
   );
 }
 
-
 function HomePage() {
-  const user = useUser(); // Getting user from context
+  const user = useUser();
   const [userInfo, setUserInfo] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const mounted = useRef(true);
   const defaultPhoto = './user.png'; 
 
   useEffect(() => {
-    // Only attempt to fetch if user and user.id are present
-    if (user?.user?.id) {
-      const fetchData = async () => {
+    const fetchData = async () => {
+      try {
         setIsLoading(true);
         const info = await GetAPI(user.user.id, null, ["user_info"]);
-        if (mounted.current) {
+        console.log("Получены данные от API:", info); // Логируем результат API
+
+        if (info && mounted.current) {
           setUserInfo(info.user_info);
-          setIsLoading(false);
+        } else {
+          console.error("Ошибка получения данных пользователя");
         }
-      };
+      } catch (error) {
+        console.error("Ошибка API:", error);
+      } finally {
+        if (mounted.current) {
+          setIsLoading(false); // Устанавливаем isLoading на false
+        }
+      }
+    };
+
+    if (user?.user?.id) {
       fetchData();
+    } else {
+      setIsLoading(false); // Если нет user.id, останавливаем загрузку
     }
 
     return () => {
       mounted.current = false;
     };
-  }, [user?.user?.id]); // Added dependency check for user.user.id
+  }, [user?.user?.id]);
 
   if (isLoading) {
     return <Loader />;
@@ -68,7 +79,6 @@ function HomePage() {
         </div>
       </div>
 
-      {/* Displaying user data for debugging */}
       <ObjectDisplayPage data={user.user} />
 
       <div className="social-links">
