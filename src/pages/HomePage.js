@@ -38,15 +38,18 @@ function HomePage() {
         console.error("Ошибка API:", error);
       } finally {
         if (mounted.current) {
+          console.log('false')
           setIsLoading(false); // Устанавливаем isLoading на false
         }
       }
     };
 
     if (user?.user?.id) {
+      alert(user.user.id)
       fetchData();
     } else {
-      setIsLoading(false); // Если нет user.id, останавливаем загрузку
+      setIsLoading(false); 
+      console.log('info')
     }
 
     return () => {
