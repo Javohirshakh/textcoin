@@ -1,45 +1,58 @@
 import React, { useState, useEffect } from 'react';
-import { useUser } from '../context/UserContext'; 
+import { useUser } from '../context/UserContext';
 import { GetAPI } from '../api/api';
 import Loader from '../components/Loader';
 import './groups.css';
 
 function GroupsPage() {
-  const user = useUser()
+  const user = useUser();
   const [userInfo, setUserInfo] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    let mounted = true;
-    setIsLoading(true);
+    if (!user?.user?.id) {
+      setIsLoading(false);
+      return;
+    }
 
-    GetAPI(user.user.id, null, ["group"]).then(info => {
-      if (mounted) {
-        setUserInfo(info);
-        setIsLoading(false);
+    const fetchData = async () => {
+      try {
+        setIsLoading(true); // Start loading
+        const info = await GetAPI(user.user.id, null, ["group"]);
+        if (info) {
+          setUserInfo(info);
+        } else {
+          console.error("Ошибка получения данных групп");
+        }
+      } catch (error) {
+        console.error("Ошибка API:", error);
+      } finally {
+        setIsLoading(false); // Stop loading after the API call finishes
       }
-    });
+    };
 
-    return () => mounted = false;
-  }, [user?.user?.id]);
+    fetchData();
+
+    return () => {
+      // Cleanup logic can be placed here if necessary
+    };
+  }, [user?.user?.id]); // Re-fetch when the user ID changes
 
   const handleClaim = async (groupName, chatId) => {
     try {
       console.log(`Отправляем запрос для группы: ${groupName}, chat_id: ${chatId}`);
-      
+
       const result = await GetAPI(user.user.id, "getball", { chat_id: chatId });
 
-      console.log("Ответ от API:", result); 
+      console.log("Ответ от API:", result);
 
-      // Проверяем статус ответа
       if (result.status) {
-        alert(result.msg || "Muvaffaqiyatli bajarildi!"); // Обычный alert для успешного сообщения
+        alert(result.msg || "Muvaffaqiyatli bajarildi!"); // Show success message
       } else {
-        alert(result.msg || "Keyinroq urinib ko'ring!"); // Обычный alert для ошибки
+        alert(result.msg || "Keyinroq urinib ko'ring!"); // Show error message
       }
-
     } catch (error) {
-      console.error(`Ошибка запроса: ${error.message}`); 
+      console.error(`Ошибка запроса: ${error.message}`);
       alert("Ошибка: Повторите позже");
     }
   };
@@ -61,13 +74,13 @@ function GroupsPage() {
                   <span>Xabarlar:</span>
                   <span>{group.xabarlar} ta</span>
                 </div>
-                <div className="flex justify-between text-xs  ">
+                <div className="flex justify-between text-xs">
                   <span>Jami pul:</span>
                   <span>{group.jami_pul} UZS</span>
                 </div>
               </div>
-              <button 
-                onClick={() => handleClaim(group.name, group.chat_id)} 
+              <button
+                onClick={() => handleClaim(group.name, group.chat_id)}
                 className="claim-button bg-green-500 hover:bg-green-700 text-white py-1 px-3 rounded ml-4"
               >
                 Olish
