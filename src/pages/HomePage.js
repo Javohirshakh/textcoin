@@ -18,10 +18,10 @@ function ObjectDisplayPage({ data }) {
 
 
 function HomePage() {
+  const user = useUser();
   const [userInfo, setUserInfo] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const mounted = useRef(true);
-  const user = useUser();
   const defaultPhoto = './user.png'; 
 
   useEffect(() => {
