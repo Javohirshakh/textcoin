@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useUser } from '../context/UserContext'; 
-import { GetAPI } from '../api/api';  // Импортируем функцию из api.js
+import { GetAPI } from '../api/api'; 
 
 function Modal() {
-  const user = useUser()
+  const user = useUser();
   const [cardNumber, setCardNumber] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false); // Управление состоянием отправки
 
   const closeModal = () => {
     document.querySelector('.modal-content').classList.remove('active');
@@ -13,10 +14,9 @@ function Modal() {
     }, 300);
   };
 
-  // Форматируем номер карты с пробелами
   const formatCardNumber = (value) => {
-    const cleaned = value.replace(/\D/g, ''); // Удаляем все нецифровые символы
-    const formatted = cleaned.match(/.{1,4}/g)?.join(' ') || ''; // Добавляем пробелы после каждых 4 цифр
+    const cleaned = value.replace(/\D/g, '');
+    const formatted = cleaned.match(/.{1,4}/g)?.join(' ') || '';
     return formatted;
   };
 
@@ -25,53 +25,51 @@ function Modal() {
     setCardNumber(formattedValue);
   };
 
-  // Обработчик отправки формы
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!user?.user?.id) {
+      alert('Пользователь не авторизован');
+      return;
+    }
 
     try {
+      setIsSubmitting(true); // Начало загрузки
       const cleanCardNumber = cardNumber.replace(/\s/g, '');
       const result = await GetAPI(user.user.id, 'savecard', { card: cleanCardNumber });
 
-      console.log("Ответ от API:", result);
-
       if (result.status) {
         alert("Karta muvaffaqiyatli ulandi!");
-        closeModal(); // Закрываем модальное окно
+        closeModal();
       } else {
-        alert("Xato: " + (result.msg || "Kartani ulab bo'lmadi, Keyinroq urinib ko'ring"));
+        alert("Ошибка: " + (result.msg || "Не удалось привязать карту, попробуйте позже"));
       }
     } catch (error) {
-      console.error("Ошибка при запросе:", error);
-      alert("Произошла ошибка, попробуйте позже.");
+      console.error("Ошибка при отправке запроса:", error);
+      alert("Произошла ошибка при сохранении карты, попробуйте позже.");
+    } finally {
+      setIsSubmitting(false); // Завершение загрузки
     }
   };
 
   useEffect(() => {
-    // Закрытие модального окна при клике вне его содержимого
     const handleClickOutside = (e) => {
       const modalContent = document.querySelector('.modal-content');
       const modal = document.getElementById('modal');
-      // Проверяем, был ли клик за пределами модального содержимого
       if (modalContent && !modalContent.contains(e.target) && modal.classList.contains('show')) {
         closeModal();
       }
     };
 
-    // Добавляем событие
     document.addEventListener('mousedown', handleClickOutside);
 
     return () => {
-      // Удаляем событие при размонтировании
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
   return (
     <div>
-
       <div id="modal" className="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-end">
-        {/* Модальное содержимое */}
         <div className="modal-content bg-white w-full h-auto max-h-80 p-4 relative">
           <span className="material-icons absolute top-2 right-4 cursor-pointer" id="close-modal" onClick={closeModal}>
             close
@@ -90,9 +88,10 @@ function Modal() {
               maxLength={19}
               pattern="\d{4} \d{4} \d{4} \d{4}"
               required
+              disabled={isSubmitting} // Заблокировать ввод во время отправки
             />
-            <button type="submit" className="w-full bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded">
-              Kartani ulash
+            <button type="submit" className="w-full bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded" disabled={isSubmitting}>
+              {isSubmitting ? 'Отправка...' : 'Kartani ulash'}
             </button>
           </form>
         </div>

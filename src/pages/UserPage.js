@@ -10,16 +10,30 @@ function UserPage() {
   const mounted = useRef(true);
   const navigate = useNavigate(); // Создаем навигатор
   const defaultPhoto = './user.png'; 
-  
   const user = useUser();
 
   useEffect(() => {
+    if (!user?.user?.id) {
+      // Если нет ID пользователя, прекращаем загрузку
+      setIsLoading(false);
+      return;
+    }
+
     const fetchData = async () => {
-      setIsLoading(true);
-      const info = await GetAPI(user.user.id, null, ["user_info"]);
-      if (mounted.current) {
-        setUserInfo(info.user_info);
-        setIsLoading(false);
+      try {
+        setIsLoading(true);
+        const info = await GetAPI(user.user.id, null, ["user_info"]);
+        if (info && mounted.current) {
+          setUserInfo(info.user_info);
+        } else {
+          console.error("Ошибка получения данных пользователя");
+        }
+      } catch (error) {
+        console.error("Ошибка API:", error);
+      } finally {
+        if (mounted.current) {
+          setIsLoading(false);
+        }
       }
     };
 
@@ -34,13 +48,12 @@ function UserPage() {
     navigate('/withdraw'); // Перенаправляем пользователя на страницу вывода
   };
 
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <>
-      {isLoading && <Loader />}
-      {!isLoading && (
-        <div className="user-info-container">
-          
-
       <div className="flex items-center p-2 user rounded-lg">
         <img
           src={user?.profilePhoto || defaultPhoto}
@@ -58,23 +71,13 @@ function UserPage() {
           <br />
           daraja
         </div>
-        </div>
-        {/* <div className="user-info-grid">
-            <div className="user-info-card">
-              <p><strong>Guruhlar soni:</strong> {userInfo.azo_guruhlari || 0}</p>
-              <p><strong>Bugungi postlar:</strong> {userInfo.bugungi_post || 0}</p>
-              <p><strong>Karta:</strong> {userInfo.card || 'Ko\'rsatilmagan'}</p>
-              <p><strong>Umumiy balans:</strong> {userInfo.jami_pul || 0} UZS</p>
-            </div>
-          </div> */}
-          <button 
-            onClick={handleWithdraw} 
-            className="w-full bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded mt-4"
-          >
-            Pul yechish
-          </button>
-        </div>
-      )}
+      </div>
+      <button 
+        onClick={handleWithdraw} 
+        className="w-full bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded mt-4"
+      >
+        Pul yechish
+      </button>
     </>
   );
 }

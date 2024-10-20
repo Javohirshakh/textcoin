@@ -1,44 +1,54 @@
 import React, { useState, useEffect } from 'react';
 import { GetAPI } from '../api/api'; // Импортируем API-функцию
 import Loader from '../components/Loader'; // Импортируем компонент Loader
+import { useUser } from '../context/UserContext'; // Импортируем контекст пользователя
 import './tasks.css';
 
 function TasksPage() {
+  const user = useUser(); // Получаем информацию о пользователе из контекста
   const [tasks, setTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Используем useEffect для запроса к API при монтировании компонента
   useEffect(() => {
-    const fetchTasks = async () => {
-      const result = await GetAPI(1234, null, ["gettask"]);
-      
-      if (result.status) {
-        // Сортируем задачи так, чтобы выполненные были внизу
-        const sortedTasks = result.gettask.sort((a, b) => a.status === b.status ? 0 : a.status ? -1 : 1);
-        setTasks(sortedTasks);
-      } else {
-        alert("Vazifalar topilmadi.");
-      }
+    if (!user?.user?.id) {
+      // Если user.id нет, прекращаем загрузку
       setIsLoading(false);
+      return;
+    }
+
+    const fetchTasks = async () => {
+      try {
+        setIsLoading(true);
+        const result = await GetAPI(user.user.id, null, ["gettask"]); // Используем ID пользователя
+
+        if (result.status) {
+          // Сортируем задачи так, чтобы выполненные были внизу
+          const sortedTasks = result.gettask.sort((a, b) => a.status === b.status ? 0 : a.status ? -1 : 1);
+          setTasks(sortedTasks);
+        } else {
+          alert("Vazifalar topilmadi.");
+        }
+      } catch (error) {
+        console.error("Ошибка API:", error);
+      } finally {
+        setIsLoading(false); // Завершаем загрузку
+      }
     };
 
     fetchTasks();
-  }, []);
+  }, [user?.user?.id]); // Зависимость от ID пользователя
 
   // Обработчик для проверки задачи
   const handleCheck = async (taskId, index) => {
     try {
       // Отправляем запрос для проверки задачи
-      const result = await GetAPI(1234, 'check.task', { task_id: taskId });
+      const result = await GetAPI(user.user.id, 'check.task', { task_id: taskId }); // Используем ID пользователя
 
-      console.log("Ответ от API проверки задачи:", result);
-
-      // Проверяем статус ответа и показываем соответствующее сообщение
       if (result.status) {
-        alert(result.msg || "Vazifa muvaffaqiyatli bajarildi!"); // Показываем успешное сообщение
-        tasks[index].status = false; // Обновляем статус задачи на "выполнено"
+        alert(result.msg || "Vazifa muvaffaqiyatli bajarildi!"); 
+        tasks[index].status = false; 
         const updatedTasks = [...tasks].sort((a, b) => a.status === b.status ? 0 : a.status ? -1 : 1);
-        setTasks(updatedTasks); // Обновляем состояние для повторного рендеринга
+        setTasks(updatedTasks);
       } else {
         alert(result.msg || "Xato: Vazifani tekshirib bo'lmadi, keyinroq urinib ko'ring.");
       }
@@ -49,7 +59,7 @@ function TasksPage() {
   };
 
   if (isLoading) {
-    return <Loader />; // Показываем компонент Loader пока загружаются задачи
+    return <Loader />; // Показываем компонент Loader, пока загружаются задачи
   }
 
   return (
@@ -78,7 +88,7 @@ function TasksPage() {
               <button 
                 className="task-button bg-green-500 hover:bg-green-700 text-white py-1 px-3 rounded ml-4" 
                 onClick={() => window.open(task.url, "_blank")} target="_blank"
-              rel="noopener noreferrer"
+                rel="noopener noreferrer"
               >
                 Bajarish
               </button>
