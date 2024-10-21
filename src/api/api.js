@@ -14,7 +14,6 @@ export async function GetAPI(userID, method = null, query) {
 
     const response = await fetch(`${apiURL}?user_id=${userID}`, {
       method: 'POST',
-      mode: 'no-cors',
       headers: {
         'Content-Type': 'application/json'
       },
